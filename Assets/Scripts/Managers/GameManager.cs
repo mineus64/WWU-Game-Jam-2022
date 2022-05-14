@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         current = this;
 
-        ToMenu();
+        ToMenu(false);
     }
 
     // Start is called before the first frame update
@@ -46,26 +46,29 @@ public class GameManager : MonoBehaviour
 
     #region Specific Methods
 
-    public void ToMenu()
+    public void ToMenu(bool unload)
     {
-        if (SceneManager.GetSceneByName(gameScene).isLoaded) {
+        if (unload == true) {
             SceneManager.UnloadSceneAsync(gameScene);
         }
 
-        if (!SceneManager.GetSceneByName(menuScene).isLoaded) {
-            SceneManager.LoadScene(menuScene, LoadSceneMode.Additive);
-        }
+        SceneManager.LoadScene(menuScene, LoadSceneMode.Additive);
     }
 
-    public void ToGame() 
+    public void ToGame(bool unload) 
     {
-        if (SceneManager.GetSceneByName(menuScene).isLoaded) {
+        if (unload == true) {
             SceneManager.UnloadSceneAsync(menuScene);
         }
 
-        if (!SceneManager.GetSceneByName(gameScene).isLoaded) {
-            SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
-        }
+        SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
+    }
+
+    public void ToGame(int numAI, Difficulty AIDifficulty, string seed) 
+    {
+        SceneManager.UnloadSceneAsync(menuScene);
+
+        SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
     }
 
     #endregion

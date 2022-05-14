@@ -90,8 +90,6 @@ public class MenuManager : MonoBehaviour
 
     public void ToNewGameMenu() 
     {
-        Debug.Log("ToNewGameMenu");
-        
         LoadMenu(1);
     }
 
@@ -110,13 +108,10 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    #endregion
-}
+    public void GameStart() 
+    {
+        GameManager.current.ToGame(AINum, AIDifficulty, gameSeed);
+    }
 
-public enum Difficulty 
-{
-    Easy,
-    Normal,
-    Hard,
-    Insane
+    #endregion
 }

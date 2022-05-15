@@ -101,7 +101,7 @@ MonoBehaviour:
   expansionRate: 1
   volume: 0
   sphere: {fileID: 6164822150987303646}
-  sphereRenderer: {fileID: 0}
+  sphereRenderer: {fileID: 2309156191557916358}
 --- !u!1 &6164822150987303646
 GameObject:
   m_ObjectHideFlags: 0

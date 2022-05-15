@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     [Header("Global Variables")]
     public PlayerController currentClient;
 
+    [Header("Objects")]
+    public GameObject sound;
+
     #endregion
 
     #region General Methods

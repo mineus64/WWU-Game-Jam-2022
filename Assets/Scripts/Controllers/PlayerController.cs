@@ -21,6 +21,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] float baseMoveSpeed;
     [SerializeField] float moveSpeed;
 
+    [Header("Sound Values")]
+    [SerializeField] float footstepVolume;
+
     #endregion
 
     #region General Methods
@@ -63,6 +66,17 @@ public class PlayerController : NetworkBehaviour
         move = this.transform.TransformDirection(move);
 
         characterController.SimpleMove(move * moveSpeed);
+
+        // Spawn footstep objects
+        if (move != Vector3.zero) {
+            float randValue = Random.Range(0, 250);
+
+            if (randValue <= moveSpeed) {
+                Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
+
+                currentSound.SetProperties(footstepVolume);
+            }
+        }
     }
 
     #endregion

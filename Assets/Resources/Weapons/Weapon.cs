@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[CreateAssetMenu(fileName = "Weapon", menuName = "Objects/Weapon")]
 public class Weapon : ScriptableObject
 {
     #region Variables
@@ -18,6 +18,7 @@ public class Weapon : ScriptableObject
     [Header("Weapon Attributes")]
     public float fireRate;
     public int magSize;
+    public int maxAmmo;
     public int reloadTime;
 
     [Header("Sound")]

@@ -157,6 +157,12 @@ public class PlayerController : NetworkBehaviour
         SetWeapon((int)Mathf.Clamp(refinedInput, -1.0f, 1.0f));
     }
 
+    //public void FireWeapon(InputAction.CallbackContext context){
+
+   //     Parojectile projectile = Instantiate(this.currentWeaponObj.)
+
+    //}
+
     #endregion
 
     #region Specific Methods

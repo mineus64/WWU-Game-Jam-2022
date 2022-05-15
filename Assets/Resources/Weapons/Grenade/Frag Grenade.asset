@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4aa58bf8702c94aa214c210b4f4b4e, type: 3}
+  m_Name: Frag Grenade
+  m_EditorClassIdentifier: 
+  weaponName: Frag Grenade
+  weaponDesc: A fragmentation grenade. Pull pin, kaboom. Extremely loud, but it solves
+    problems.
+  weaponNoiseCosmetic: Yes
+  weaponIcon: {fileID: 21300000, guid: c4cc8ecb4bdc88f4a976e89a0676f8ba, type: 3}
+  weaponObject: {fileID: 919132149155446097, guid: d00f667a899dadb4880512c0102a0e04, type: 3}
+  fireRate: 5
+  magSize: 1
+  maxAmmo: 5
+  reloadTime: 1
+  weaponNoise: 60
+  damage: 50
+  spread: 0

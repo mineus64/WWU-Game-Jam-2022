@@ -17,13 +17,17 @@ public class Weapon : ScriptableObject
     public GameObject weaponObject;
 
     [Header("Weapon Attributes")]
-    public float fireRate;
+    public float fireRate;      // RPM
     public int magSize;
     public int maxAmmo;
     public float reloadTime;
 
     [Header("Sound")]
     public float weaponNoise;
+
+    [Header("Offensive Stats")]
+    public float damage;
+    public float spread;        // Degrees
 
     #endregion
 

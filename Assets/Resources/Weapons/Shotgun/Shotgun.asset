@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4aa58bf8702c94aa214c210b4f4b4e, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  weaponName: Shotgun
+  weaponDesc: The classic boomstick. Whether you're facing demons from hell or the
+    evil dead, this will put them right back in the grave. As long as you get close
+    enough.
+  weaponNoiseCosmetic: Boomstick
+  weaponIcon: {fileID: 21300000, guid: 9b3399a860e0a5d4f828c0ab3daff439, type: 3}
+  weaponObject: {fileID: 919132149155446097, guid: 9692573df6e32ec4b94454f422a54786, type: 3}
+  fireRate: 1
+  magSize: 6
+  maxAmmo: 30
+  reloadTime: 4
+  weaponNoise: 50
+  damage: 15
+  spread: 0

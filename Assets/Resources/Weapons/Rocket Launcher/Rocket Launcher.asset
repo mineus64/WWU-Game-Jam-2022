@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4aa58bf8702c94aa214c210b4f4b4e, type: 3}
+  m_Name: Rocket Launcher
+  m_EditorClassIdentifier: 
+  weaponName: Rocket Launcher
+  weaponDesc: Some say this weapon is wildly impractical for a battle in a maze where
+    sound is as much your enemy as it is your ally. And some look good as a stain
+    on the floor. Go figure.
+  weaponNoiseCosmetic: Excessive
+  weaponIcon: {fileID: 21300000, guid: c485b03ca6b6abe41a364a97b3c9eabf, type: 3}
+  weaponObject: {fileID: 919132149155446097, guid: 7659c51e8bd4f094399e9ec0a4db9465, type: 3}
+  fireRate: 1
+  magSize: 1
+  maxAmmo: 5
+  reloadTime: 5
+  weaponNoise: 90
+  damage: 100
+  spread: 0

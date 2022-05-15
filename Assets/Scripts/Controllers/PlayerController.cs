@@ -58,8 +58,7 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        characterController.Move(movement * moveSpeed * Time.deltaTime);
+        characterController.SimpleMove(movement * moveSpeed);
     }
 
     #endregion

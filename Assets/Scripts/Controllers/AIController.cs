@@ -197,7 +197,13 @@ public class AIController : NetworkBehaviour
 
     void AttackEnter() 
     {
+        patrolTarget = playerTarget.transform.position;
 
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(patrolTarget, out hit, 2.0f, NavMesh.AllAreas);
+
+        navMeshAgent.SetDestination(hit.position);
     }
 
     void AttackBehaviour() 
@@ -212,6 +218,19 @@ public class AIController : NetworkBehaviour
 
         if (!Physics.Raycast(this.transform.position, rayDirection, out hit)) {
             behaviour = AIBehaviour.Searching;
+        }
+
+        if (Vector3.Distance(playerTarget.transform.position, this.transform.position) > 10.0f) {
+            patrolTarget = playerTarget.transform.position;
+
+            NavMeshHit navhit;
+
+            NavMesh.SamplePosition(patrolTarget, out navhit, 2.0f, NavMesh.AllAreas);
+
+            navMeshAgent.SetDestination(navhit.position);
+        }
+        else {
+            navMeshAgent.SetDestination(this.transform.position);
         }
     }
 

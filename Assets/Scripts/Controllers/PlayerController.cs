@@ -17,6 +17,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] public GameObject cameraAnchor;
 
     [Header("Movement Values")]
+    [SerializeField] WalkState walkState;
     [SerializeField] Vector3 movement;
     [SerializeField] float baseMoveSpeed;
     [SerializeField] float moveSpeed;
@@ -102,7 +103,22 @@ public class PlayerController : NetworkBehaviour
 
     public void SprintWalk(InputAction.CallbackContext context) 
     {
-        moveSpeed = baseMoveSpeed + (context.ReadValue<float>() * (baseMoveSpeed * 0.5f));
+        float movement = context.ReadValue<float>();
+
+        moveSpeed = baseMoveSpeed + (movement * (baseMoveSpeed * 0.5f));
+
+        switch (movement) 
+        {
+            case < 0:
+                walkState = WalkState.Walking;
+                break;
+            case > 0:
+                walkState = WalkState.Running;
+                break;
+            default:
+                walkState = WalkState.Jogging;
+                break;
+        }
     }
 
     void SpawnSound() 
@@ -114,3 +130,14 @@ public class PlayerController : NetworkBehaviour
 
     #endregion
 }
+
+#region Enums
+
+public enum WalkState 
+{
+    Walking,
+    Jogging,
+    Running
+}
+
+#endregion

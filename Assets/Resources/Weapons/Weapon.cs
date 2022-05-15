@@ -2,32 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Weapon : ScriptableObject
 {
     #region Variables
 
+    [Header("Cosmetic")]
+    public string weaponName;
+    public string weaponDesc;
+    public Sprite weaponIcon;
 
+    [Header("Weapon Object")]
+    public GameObject weaponObject;
 
-    #endregion
+    [Header("Weapon Attributes")]
+    public float fireRate;
+    public int magSize;
+    public int reloadTime;
 
-    #region General Methods
-
-    void Awake() 
-    {
-        
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Sound")]
+    public float weaponNoise;
 
     #endregion
 

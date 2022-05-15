@@ -194,10 +194,10 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-        IEnumerator FireCooldown(float rateOfFire){
-            new WaitForSeconds(1/rateOfFire);
-            yield return null;
-        }
+    IEnumerator FireCooldown(float rateOfFire){
+        new WaitForSeconds(1/rateOfFire);
+        yield return null;
+    }
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
@@ -249,6 +249,20 @@ public class PlayerController : NetworkBehaviour
         GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
         GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
         GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
+    }
+
+    public void AddWeapon(int weapon, int ammo = 0) 
+    {
+        WeaponSlot weaponSlot = weaponsInBag[weapon];
+
+        weaponSlot.isInBag = true;
+
+        weaponSlot.reserveAmmo = Mathf.Min(weaponSlot.reserveAmmo + ammo, weaponSlot.weapon.maxAmmo);
+    }
+
+    public void RemoveWeapon(int weapon) 
+    {
+        weaponsInBag[weapon].isInBag = false;
     }
 
     public void SetHealth(float healthSet) 

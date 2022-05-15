@@ -127,7 +127,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   baseMoveSpeed: 5
   moveSpeed: 5
-  footstepVolume: 10
+  footstepVolume: 15
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0

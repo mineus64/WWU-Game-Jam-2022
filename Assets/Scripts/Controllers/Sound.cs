@@ -18,7 +18,8 @@ public class Sound : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] GameObject sphere;
-    [SerializeField] MeshRenderer sphereRenderer;
+    [SerializeField] MeshRenderer sphereRendererOutside;
+    [SerializeField] MeshRenderer sphereRendererInside;
 
     #endregion
     
@@ -43,7 +44,8 @@ public class Sound : MonoBehaviour
 
         float volumeFactor = volume * 0.01f;
 
-        sphereRenderer.sharedMaterial.SetFloat("Volume", valuesOverTime.Evaluate(volumeFactor));
+        sphereRendererOutside.sharedMaterial.SetFloat("Volume", valuesOverTime.Evaluate(volumeFactor));
+        sphereRendererInside.sharedMaterial.SetFloat("Volume", valuesOverTime.Evaluate(volumeFactor));
     }
 
     #endregion

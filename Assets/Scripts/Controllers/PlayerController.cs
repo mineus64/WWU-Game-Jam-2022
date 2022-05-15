@@ -14,7 +14,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
-    [SerializeField] GameObject cameraAnchor;
+    [SerializeField] public GameObject cameraAnchor;
 
     [Header("Movement Values")]
     [SerializeField] Vector3 movement;

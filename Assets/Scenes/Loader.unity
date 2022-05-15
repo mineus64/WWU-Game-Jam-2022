@@ -257,3 +257,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: Assets/Scenes/Menu.unity
   gameScene: Assets/Scenes/Game.unity
+  networkManager: {fileID: 1440081584}

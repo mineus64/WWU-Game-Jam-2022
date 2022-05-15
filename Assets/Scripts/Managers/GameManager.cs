@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour
 
     #region Variables
 
+    [Header("Scenes")]
     [Scene] [SerializeField] string menuScene;
     [Scene] [SerializeField] string gameScene;
+
+    [Header("Components")]
+    public NetworkManager networkManager;
 
     #endregion
 
@@ -62,6 +66,8 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
+
+        networkManager.StartHost();
     }
 
     public void ToGame(int numAI, Difficulty AIDifficulty, string seed) 
@@ -69,6 +75,8 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync(menuScene);
 
         SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
+
+        networkManager.StartHost();
     }
 
     #endregion

@@ -15,6 +15,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
 
+    [Header("Movement Values")]
+    [SerializeField] Vector3 movement;
+    [SerializeField] float moveSpeed;
+
     #endregion
 
     #region General Methods
@@ -34,10 +38,12 @@ public class PlayerController : NetworkBehaviour
         // Todo only if this player is NOT the current client's player
         else {
 
+            /*
             if (playerInput == null) {
                 playerInput = this.GetComponent<PlayerInput>();
             }
             Destroy(playerInput);
+            */
 
         }
     }
@@ -51,7 +57,7 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        characterController.Move(movement * moveSpeed * Time.deltaTime);
     }
 
     #endregion
@@ -62,14 +68,14 @@ public class PlayerController : NetworkBehaviour
     {
         float moveAmt = context.ReadValue<float>();
 
-        characterController.Move(Vector3.forward * moveAmt * Time.deltaTime);
+        movement.z = moveAmt;
     }
 
     public void StrafeLeftRight(InputAction.CallbackContext context) 
     {
         float moveAmt = context.ReadValue<float>();
 
-        characterController.Move(Vector3.right * moveAmt * Time.deltaTime);
+        movement.x = moveAmt;
     }
 
     #endregion

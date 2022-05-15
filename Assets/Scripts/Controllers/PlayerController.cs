@@ -33,6 +33,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] WeaponSlot[] weaponsInBag;
     [SerializeField] int currentWeapon = 0;
     [SerializeField] GameObject currentWeaponObj;
+    [SerializeField] bool isFiring;
 
     [Header("Health Values")]
     [SerializeField] float currentHealth;
@@ -126,6 +127,19 @@ public class PlayerController : NetworkBehaviour
             int refinedInput = (int)Mathf.Clamp(rawInput.y, -1.0f, 1.0f);
 
             SetWeapon(refinedInput);
+        }
+    }
+
+    public void Fire(InputAction.CallbackContext context) 
+    {
+        if (context.started) {
+            isFiring = true;
+        }
+        else if (context.performed) {
+            isFiring = true;
+        }
+        else if (context.canceled) {
+            isFiring = false;
         }
     }
 

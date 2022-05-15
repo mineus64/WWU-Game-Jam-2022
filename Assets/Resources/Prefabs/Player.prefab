@@ -125,6 +125,7 @@ MonoBehaviour:
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
   movement: {x: 0, y: 0, z: 0}
+  baseMoveSpeed: 5
   moveSpeed: 5
 --- !u!114 &5620339083496614362
 MonoBehaviour:
@@ -200,6 +201,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: b1f51405-a75e-4f6c-afe8-1f2c9fe8487f
     m_ActionName: Controls/Move Left/Right[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2298202664374931542}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SprintWalk
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: cbca6ec0-780a-4ffc-89c2-cf0be464a263
+    m_ActionName: Controls/Sprint/Walk[/Keyboard/leftCtrl,/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Controls

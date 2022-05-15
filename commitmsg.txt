@@ -13,3 +13,18 @@
 1652568464|Added Main Menu Functionality
 1652569707|Added GameSettings
 1652572018|Created Prefabs
+1652575112|Created Controllers for Player and AI
+1652575470|Added Input Actions
+1652575741|Updated Controller Types
+1652576710|Added Player Movement
+1652578167|Made Movement Actually Work
+1652579251|Fixed Host Logic
+1652579359|Created CameraController
+1652580792|Added Camera Parenting
+1652582125|Newton
+1652587398|Made Camera Work
+1652588248|Fixed Player Movement
+1652588822|Test map
+1652589199|Actually added the map this time
+1652589281|Added Sound Object
+1652590593|Added Sound Shader

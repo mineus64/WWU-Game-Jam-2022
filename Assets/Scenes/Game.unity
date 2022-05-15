@@ -255,8 +255,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camParent: {fileID: 0}
-  horizontalSensitivity: 1
-  verticalSensitivity: 1
+  horizontalSensitivity: 2.5
+  verticalSensitivity: 2.5
   maxLookUp: -75
   minLookDown: 60
 --- !u!1 &72539905

@@ -155,6 +155,8 @@ public class PlayerController : NetworkBehaviour
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
+        Debug.Log(weaponSwitch);        // DEBUG
+
         if (weaponSwitch == 0 && weaponSet == 0) {
             return;
         }

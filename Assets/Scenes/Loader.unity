@@ -260,3 +260,14 @@ MonoBehaviour:
   networkManager: {fileID: 1440081584}
   currentClient: {fileID: 0}
   sound: {fileID: 3430038345069420925, guid: e6612425a836c0349ac2db9e54accd4b, type: 3}
+  weapons:
+  - {fileID: 11400000, guid: 4a67f209ca074304fba73ff40ed24299, type: 2}
+  - {fileID: 11400000, guid: 9263703f1b0b9f24486d8893ad2996ca, type: 2}
+  - {fileID: 11400000, guid: 4bde72a183781b64892004fb306d59cd, type: 2}
+  - {fileID: 11400000, guid: 4c92316f1369b694a9d1016739e7ecb9, type: 2}
+  - {fileID: 11400000, guid: bf3e1153380a98640939a35cc4cbd82e, type: 2}
+  - {fileID: 11400000, guid: 82c956fa617543b46b8af612fb8a486a, type: 2}
+  - {fileID: 11400000, guid: d4ba1aa7971a77449974f0b23c078acb, type: 2}
+  - {fileID: 11400000, guid: d1e9cbc9a012c4c41b1a3576020f51eb, type: 2}
+  - {fileID: 11400000, guid: 09c4290aa9b6f6042a5d524afdbfe68e, type: 2}
+  - {fileID: 11400000, guid: 156704d95d1df4a4398bf79983512da7, type: 2}

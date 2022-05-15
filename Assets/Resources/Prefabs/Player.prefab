@@ -36,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8857491996771288069}
+  - {fileID: 2093045705519065827}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -124,12 +125,17 @@ MonoBehaviour:
   characterController: {fileID: 1356177442651576243}
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
-  rb: {fileID: 5559318756357213752}
+  weaponAnchor: {fileID: 3847762614197723888}
   walkState: 0
   movement: {x: 0, y: 0, z: 0}
   baseMoveSpeed: 5
   moveSpeed: 5
   footstepVolume: 15
+  weaponsInBag: 01000000000000000000
+  currentWeapon: 0
+  currentWeaponObj: {fileID: 0}
+  currentAmmo: 10000000000000000000000000000000000000000000000000000000000000000000000000000000
+  reserveAmmo: 20000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,9 +223,25 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
     m_ActionId: cbca6ec0-780a-4ffc-89c2-cf0be464a263
     m_ActionName: Controls/Sprint/Walk[/Keyboard/leftCtrl,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2298202664374931542}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: SwitchWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 516ed45b-b449-41f7-b499-0504c7d6cd1c
+    m_ActionName: Controls/Weapon Switch[/Mouse/scroll]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Controls
@@ -241,6 +263,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &3847762614197723888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2093045705519065827}
+  m_Layer: 0
+  m_Name: Weapon Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2093045705519065827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3847762614197723888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.417, y: 0.169, z: 0.468}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8237813052861565432}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5966414240533276398
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5966414240533276398}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.687, z: 0.467}
+  m_LocalPosition: {x: 0, y: 0.473, z: -0.115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

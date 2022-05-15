@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Objects")]
     public GameObject sound;
+    public Weapon[] weapons;
 
     #endregion
 

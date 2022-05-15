@@ -112,11 +112,13 @@ public class PlayerController : NetworkBehaviour
 
     public void SwitchWeapon(InputAction.CallbackContext context) 
     {
-        Vector2 rawInput = context.ReadValue<Vector2>();
+        if (context.performed) {
+            Vector2 rawInput = context.ReadValue<Vector2>();
 
-        int refinedInput = (int)Mathf.Clamp(rawInput.y, -1.0f, 1.0f);
+            int refinedInput = (int)Mathf.Clamp(rawInput.y, -1.0f, 1.0f);
 
-        SetWeapon(refinedInput);
+            SetWeapon(refinedInput);
+        }
     }
 
     #endregion
@@ -155,7 +157,6 @@ public class PlayerController : NetworkBehaviour
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
-        Debug.Log(weaponSwitch);        // DEBUG
 
         if (weaponSwitch == 0 && weaponSet == 0) {
             return;
@@ -168,7 +169,7 @@ public class PlayerController : NetworkBehaviour
                 if (currentWeapon >= weaponsInBag.Length) {
                     currentWeapon = 0;
                 }
-                else if (currentWeapon < weaponsInBag.Length) {
+                else if (currentWeapon < 0) {
                     currentWeapon = weaponsInBag.Length - 1;
                 }
             }
@@ -195,7 +196,6 @@ public class PlayerController : NetworkBehaviour
                 }
             }
 
-            Debug.Log(string.Format("CurrentWeapon: {0}: {1}", currentWeapon, weaponsInBag[currentWeapon]));      // DEBUG
         }
 
         Destroy(currentWeaponObj);

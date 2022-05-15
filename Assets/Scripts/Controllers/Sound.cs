@@ -11,10 +11,15 @@ public class Sound : MonoBehaviour
     [Header("Common Sound Values")]
     [SerializeField] AnimationCurve opacityOverTime;
     [SerializeField] AnimationCurve colourOverTime;
+    [SerializeField] Gradient colourRange;
+    [SerializeField] float expansionRate;
 
     [Header("Sound Properties")]
     [SerializeField] float volume;
-    [SerializeField] float colour;
+
+    [Header("Objects")]
+    [SerializeField] GameObject sphere;
+    [SerializeField] MeshRenderer sphererenderer;
 
     #endregion
     
@@ -29,7 +34,15 @@ public class Sound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        volume -= Time.deltaTime;   
+        volume -= Time.deltaTime; 
+
+        transform.localScale += Vector3.one * (expansionRate * Time.deltaTime);
+
+        float volumeFactor = volume * 0.01f;
+
+        if (volume <= 0) {
+            Destroy(this.gameObject);
+        }  
     }
 
     #endregion

@@ -200,6 +200,7 @@ public class PlayerController : NetworkBehaviour
             SpawnSound();
             yield return null;
         }
+    }
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
         if (weaponSwitch == 0 && weaponSet == 0) {

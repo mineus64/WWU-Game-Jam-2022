@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  stepLength: 0
+  stepLength: 5
   characterController: {fileID: 1356177442651576243}
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
@@ -131,11 +131,49 @@ MonoBehaviour:
   baseMoveSpeed: 5
   moveSpeed: 5
   footstepVolume: 15
-  weaponsInBag: 01000000000000000000
+  weaponsInBag:
+  - name: Pistol
+    isInBag: 1
+    magAmmo: 16
+    reserveAmmo: 32
+  - name: Anti-Material Rifle
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Assault Rifle
+    isInBag: 1
+    magAmmo: 30
+    reserveAmmo: 60
+  - name: Big Bang Grenade
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Decoy Grenade
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Frag Grenade
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Pistol (Suppressed)
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Rocket Launcher
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: Shotgun
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
+  - name: SMG
+    isInBag: 0
+    magAmmo: 0
+    reserveAmmo: 0
   currentWeapon: 0
   currentWeaponObj: {fileID: 0}
-  currentAmmo: 10000000000000000000000000000000000000000000000000000000000000000000000000000000
-  reserveAmmo: 20000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0

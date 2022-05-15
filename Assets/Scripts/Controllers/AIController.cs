@@ -4,6 +4,7 @@ using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(CharacterController))]
 public class AIController : NetworkBehaviour
@@ -33,6 +34,19 @@ public class AIController : NetworkBehaviour
     [SerializeField] float currentHealth;
     [SerializeField] float maxHealth;
 
+    [Header("AI")]
+    [SerializeField] NavMeshAgent navMeshAgent;
+
+    [Header("AI Behaviour Values")]
+    [SerializeField] AIBehaviour behaviour = AIBehaviour.Patrolling;
+    [SerializeField] PlayerController playerTarget;
+    [SerializeField] Vector3 patrolTarget;
+    [SerializeField] float AITimer;
+
+    [Header("AI Constraints")]
+    [SerializeField] bool canBecomeSelfAware = false;
+    [SerializeField] Vector4 movementSampleConstraints = new Vector4(-15.0f, 15.0f, -15.0f, 15.0f);
+
     #endregion
 
     #region General Methods
@@ -46,14 +60,123 @@ public class AIController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AITimer -= Time.deltaTime;
+
+        if (AITimer > 0) {
+            switch (behaviour) 
+            {
+                case AIBehaviour.Patrolling:
+                    PatrolBehaviour();
+                    break;
+                case AIBehaviour.Searching:
+                    SearchBehaviour();
+                    break;
+                case AIBehaviour.Attacking:
+                    AttackBehaviour();
+                    break;
+                case AIBehaviour.Retreating:
+                    RetreatBehaviour();
+                    break;
+            }
+        }
+        else {
+            switch (behaviour) 
+            {
+                case AIBehaviour.Patrolling:
+                    PatrolExit();
+                    break;
+                case AIBehaviour.Searching:
+                    SearchExit();
+                    break;
+                case AIBehaviour.Attacking:
+                    AttackExit();
+                    break;
+                case AIBehaviour.Retreating:
+                    RetreatExit();
+                    break;
+            }
+        }
     }
 
     #endregion
 
     #region Specific Methods
 
+    void PatrolEnter() 
+    {
+        patrolTarget = new Vector3(
+            Random.Range(movementSampleConstraints.x, movementSampleConstraints.y),
+            0.0f,
+            Random.Range(movementSampleConstraints.z, movementSampleConstraints.w)
+        );
 
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(patrolTarget, out hit, 2.0f, NavMesh.AllAreas);
+    }
+
+    void PatrolBehaviour() 
+    {
+
+    }
+
+    void PatrolExit() 
+    {
+
+    }
+
+    void SearchEnter() 
+    {
+
+    }
+
+    void SearchBehaviour() 
+    {
+
+    }
+
+    void SearchExit() 
+    {
+
+    }
+
+    void AttackEnter() 
+    {
+
+    }
+
+    void AttackBehaviour() 
+    {
+
+    }
+
+    void AttackExit() 
+    {
+
+    }
+
+    void RetreatEnter() 
+    {
+
+    }
+
+    void RetreatBehaviour() 
+    {
+
+    }
+
+    void RetreatExit() 
+    {
+
+    }
 
     #endregion
+}
+
+enum AIBehaviour 
+{
+    Patrolling,
+    Searching,
+    Attacking,
+    Retreating
 }

@@ -280,6 +280,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 516ed45b-b449-41f7-b499-0504c7d6cd1c
     m_ActionName: Controls/Weapon Switch[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2298202664374931542}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 849d33c0-8018-4442-ad5a-bb4fb1de5633
+    m_ActionName: Controls/Weapon Fire[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Controls

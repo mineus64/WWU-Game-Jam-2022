@@ -121,6 +121,12 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    //public void FireWeapon(InputAction.CallbackContext context){
+
+   //     Parojectile projectile = Instantiate(this.currentWeaponObj.)
+
+    //}
+
     #endregion
 
     #region Specific Methods

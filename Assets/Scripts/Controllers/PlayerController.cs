@@ -121,11 +121,17 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    //public void FireWeapon(InputAction.CallbackContext context){
+    // public void FireWeapon(InputAction.CallbackContext context){
 
-   //     Parojectile projectile = Instantiate(this.currentWeaponObj.)
-
-    //}
+    //     if(context.performed){
+    //         float fireRate = this.currentWeaponObj.GetComponent<Weapon>().fireRate;
+    //         while(fireRate > 0 && ){
+    //             fireRate -= 1;
+    //             GameObject projectile = Instantiate(this.currentWeaponObj.GetComponent<Weapon>().weaponProjectile.projectileObject, weaponAnchor.transform.position, Quaternion.identity);
+    //             StartCoroutine(FireCooldown(fireRate));
+    //         }
+    //     }
+    // }
 
     #endregion
 
@@ -160,6 +166,10 @@ public class PlayerController : NetworkBehaviour
             yield return null;
         }
     }
+
+        IEnumerator FireCooldown(float rateOfFire){
+            new WaitForSeconds(1/rateOfFire);
+        }
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {

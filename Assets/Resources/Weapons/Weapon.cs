@@ -16,6 +16,8 @@ public class Weapon : ScriptableObject
     [Header("Weapon Object")]
     public GameObject weaponObject;
 
+    public Projectile weaponProjectile;
+
     [Header("Weapon Attributes")]
     public float fireRate;      // RPM
     public int magSize;
@@ -29,10 +31,13 @@ public class Weapon : ScriptableObject
     public float damage;
     public float spread;        // Degrees
 
+    public bool penetrates;
+
+    public bool explodes;
+
     #endregion
 
     #region Specific Methods
-
 
 
     #endregion

@@ -10,6 +10,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
+    public bool allowfire;
+    public float fireRate;
 
     [Header("Variables")]
 
@@ -51,7 +53,7 @@ public class PlayerController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        allowfire = true;
         // Todo on all players
         if (characterController == null) {
             characterController = this.GetComponent<CharacterController>();
@@ -91,12 +93,13 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer) {
             GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
         }
-        if(isFiring){
-            fireWeapon();
-        }
     }
     void FixedUpdate() {
-
+        if(isFiring && allowfire){
+            Debug.Log("Firing!");
+            allowfire = false;
+            StartCoroutine(fireWeapon());
+        }
     }
 
     #endregion
@@ -243,14 +246,20 @@ public class PlayerController : NetworkBehaviour
         GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
     }
 
-    void fireWeapon(){
-        float fireRate = GameManager.current.weapons[currentWeapon].fireRate;
-        while(fireRate > 0){
+    IEnumerator fireWeapon(){
+        fireRate = GameManager.current.weapons[currentWeapon].fireRate;
+        float originalFireRate = fireRate;
+        while(fireRate > 0 && isFiring == true){
             fireRate -= 1;
             GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody>().AddForce(Vector3.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 1000);
-            StartCoroutine(FireCooldown(fireRate));
+            bullet.GetComponent<Transform>().SetParent(this.transform);
+            bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
+            bullet.GetComponent<Transform>().SetParent(null, true);
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
+            yield return new WaitForSeconds(1/originalFireRate);
         }
+        allowfire = true;
+        yield return null;
     }
     public void AddWeapon(int weapon, int ammo = 0) 
     {

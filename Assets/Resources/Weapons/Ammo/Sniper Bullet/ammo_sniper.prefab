@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3589932617633068751}
   - component: {fileID: 5763845123334630274}
   - component: {fileID: 3192067930868548053}
-  - component: {fileID: 5429712792755348374}
+  - component: {fileID: -1941149812076466897}
   m_Layer: 0
   m_Name: ammo_sniper
   m_TagString: Untagged
@@ -143,12 +143,12 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &5429712792755348374
+--- !u!136 &-1941149812076466897
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,7 +156,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4222634955373227125}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.005
   m_Height: 0.024

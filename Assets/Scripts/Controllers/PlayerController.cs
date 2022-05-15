@@ -69,7 +69,7 @@ public class PlayerController : NetworkBehaviour
 
         // Spawn footstep objects
         if (move != Vector3.zero) {
-            float randValue = Random.Range(0, 250);
+            float randValue = Random.Range(0, 1000);
 
             if (randValue <= moveSpeed) {
                 Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();

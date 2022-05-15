@@ -26,6 +26,10 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] TMP_Text healthText;
     [SerializeField] Gradient healthGradient;
 
+    [Header("Pickup Text")]
+    [SerializeField] TMP_Text pickupText;
+    [SerializeField] float pickupTextTimer;
+
     #endregion
 
     #region General Methods
@@ -44,7 +48,11 @@ public class GameUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        pickupTextTimer = Mathf.Max(pickupTextTimer - Time.deltaTime, 0.0f);
+
+        if (pickupTextTimer <= 0 && pickupText.gameObject.activeSelf) {
+            pickupText.gameObject.SetActive(false);
+        }
     }
 
     #endregion
@@ -73,6 +81,28 @@ public class GameUIManager : MonoBehaviour
         healthBar.fillAmount = currentHealth / maxHealth;
 
         healthBar.color = healthGradient.Evaluate(healthBar.fillAmount);
+    }
+
+    public void WeaponPickup(int weapon) 
+    {
+        string weaponName = GameManager.current.weapons[weapon].weaponName;
+
+        pickupText.text = string.Format("You have picked up a new {0}", weaponName);
+
+        pickupText.gameObject.SetActive(true);
+
+        pickupTextTimer = 3.5f;
+    }
+
+    public void AmmoPickup(int weapon) 
+    {
+        string ammoName = GameManager.current.weapons[weapon].weaponName;
+
+        pickupText.text = string.Format("You have picked up ammo for your {0}", ammoName);
+
+        pickupText.gameObject.SetActive(true);
+
+        pickupTextTimer = 1.5f;
     }
 
     #endregion

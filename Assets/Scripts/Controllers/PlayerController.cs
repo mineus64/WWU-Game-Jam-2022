@@ -261,6 +261,11 @@ public class PlayerController : NetworkBehaviour
             weaponSlot.magAmmo = Mathf.Min(weaponSlot.weapon.magSize, ammo);
 
             ammo -= weaponSlot.magAmmo;
+
+            GameUIManager.current.WeaponPickup(weapon);
+        }
+        else {
+            GameUIManager.current.AmmoPickup(weapon);
         }
 
         weaponSlot.reserveAmmo = Mathf.Min(weaponSlot.reserveAmmo + ammo, weaponSlot.weapon.maxAmmo);

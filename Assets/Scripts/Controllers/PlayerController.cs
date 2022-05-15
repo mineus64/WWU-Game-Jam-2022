@@ -28,16 +28,16 @@ public class PlayerController : NetworkBehaviour
     [Header("Weapon Values")]
     [SerializeField] bool[] weaponsInBag = 
     {
-        true,       // 
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
+        true,       // Pistol
+        false,      // Anti-Material Rifle
+        false,      // Assault Rifle
+        false,      // Big Bang Grenade
+        false,      // Decoy Grenade
+        false,      // Frag Grenade
+        false,      // Pistol (Suppressed)
+        false,      // Rocket Launcher
+        false,      // Shotgun
+        false       // SMG
     };
 
     #endregion

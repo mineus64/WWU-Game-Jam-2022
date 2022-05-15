@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] Image magAmmoCount;
     [SerializeField] Image resAmmoCount;
     [SerializeField] Image weaponIcon;
+
+    [Header("Healthbar")]
+    [SerializeField] Image healthBar;
+    [SerializeField] TMP_Text healthText;
+    [SerializeField] Gradient healthGradient;
 
     #endregion
 
@@ -58,6 +64,15 @@ public class GameUIManager : MonoBehaviour
     public void UpdateWeaponIcon(Sprite weaponIcon) 
     {
         this.weaponIcon.sprite = weaponIcon;
+    }
+
+    public void UpdateHealth(float currentHealth, float maxHealth) 
+    {
+        healthText.text = ((int)currentHealth).ToString();
+
+        healthBar.fillAmount = currentHealth / maxHealth;
+
+        healthBar.color = healthGradient.Evaluate(healthBar.fillAmount);
     }
 
     #endregion

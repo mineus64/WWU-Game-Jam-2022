@@ -185,8 +185,8 @@ MonoBehaviour:
   currentWeapon: 0
   currentWeaponObj: {fileID: 0}
   isFiring: 0
-  currentHealth: 0
-  maxHealth: 0
+  currentHealth: 100
+  maxHealth: 100
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0

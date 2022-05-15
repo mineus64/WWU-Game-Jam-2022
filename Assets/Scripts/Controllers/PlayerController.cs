@@ -74,10 +74,6 @@ public class PlayerController : NetworkBehaviour
         }
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
-
-        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
-        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
-        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
     }
 
     // Update is called once per frame
@@ -87,6 +83,15 @@ public class PlayerController : NetworkBehaviour
         move = this.transform.TransformDirection(move);
 
         characterController.SimpleMove(move * moveSpeed);
+
+        // Temporary fix, because GameUIManager.current doesn't populate until after this class' Start() method is run. Will need to fix later.
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
+        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
+        }
     }
 
     void FixedUpdate() {
@@ -239,6 +244,10 @@ public class PlayerController : NetworkBehaviour
     {
         currentHealth = healthSet;
 
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
+
         if (currentHealth <= 0) {
             Die();
         }
@@ -247,6 +256,10 @@ public class PlayerController : NetworkBehaviour
     public void DeltaHealth(float healthDelta) 
     {
         currentHealth += healthDelta;
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
 
         if (currentHealth <= 0) {
             Die();

@@ -9,8 +9,7 @@ public class Sound : MonoBehaviour
     #region Variables
 
     [Header("Common Sound Values")]
-    [SerializeField] AnimationCurve opacityOverTime;
-    [SerializeField] AnimationCurve colourOverTime;
+    [SerializeField] AnimationCurve valuesOverTime;
     [SerializeField] Gradient colourRange;
     [SerializeField] float expansionRate;
 
@@ -19,7 +18,7 @@ public class Sound : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] GameObject sphere;
-    [SerializeField] MeshRenderer sphererenderer;
+    [SerializeField] MeshRenderer sphereRenderer;
 
     #endregion
     
@@ -34,22 +33,27 @@ public class Sound : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (volume <= 0) {
+            Destroy(this.gameObject);
+        }  
+
         volume -= Time.deltaTime; 
 
         transform.localScale += Vector3.one * (expansionRate * Time.deltaTime);
 
         float volumeFactor = volume * 0.01f;
 
-        if (volume <= 0) {
-            Destroy(this.gameObject);
-        }  
+        sphereRenderer.sharedMaterial.SetFloat("Volume", valuesOverTime.Evaluate(volumeFactor));
     }
 
     #endregion
 
     #region Specific Methods
 
-
+    public void SetProperties(float volume) 
+    {
+        this.volume = Mathf.Clamp(volume, 0, 100);
+    }
 
     #endregion
 }

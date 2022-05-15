@@ -18,6 +18,7 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Movement Values")]
     [SerializeField] Vector3 movement;
+    [SerializeField] float baseMoveSpeed;
     [SerializeField] float moveSpeed;
 
     #endregion
@@ -80,6 +81,11 @@ public class PlayerController : NetworkBehaviour
         float moveAmt = context.ReadValue<float>();
 
         movement.x = moveAmt;
+    }
+
+    public void SprintWalk(InputAction.CallbackContext context) 
+    {
+        float moveSpeed = baseMoveSpeed + context.ReadValue<float>();
     }
 
     #endregion

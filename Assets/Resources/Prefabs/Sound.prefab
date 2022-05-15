@@ -45,14 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcf43e0c4e90294c829d0a0e48d4e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opacityOverTime:
+  valuesOverTime:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -60,32 +60,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  colourOverTime:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
       inSlope: 2
       outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -125,7 +101,7 @@ MonoBehaviour:
   expansionRate: 1
   volume: 0
   sphere: {fileID: 6164822150987303646}
-  sphererenderer: {fileID: 2309156191557916358}
+  sphereRenderer: {fileID: 0}
 --- !u!1 &6164822150987303646
 GameObject:
   m_ObjectHideFlags: 0

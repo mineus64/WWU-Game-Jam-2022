@@ -19,6 +19,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Excessive
   weaponIcon: {fileID: 21300000, guid: c485b03ca6b6abe41a364a97b3c9eabf, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: 7659c51e8bd4f094399e9ec0a4db9465, type: 3}
+  weaponProjectile: {fileID: 4382655571473986725, guid: e5a7a6d89579afb46a3657de5e40d478, type: 3}
   fireRate: 1
   magSize: 1
   maxAmmo: 5
@@ -26,3 +27,5 @@ MonoBehaviour:
   weaponNoise: 90
   damage: 100
   spread: 0
+  penetrates: 0
+  explodes: 1

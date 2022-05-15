@@ -82,8 +82,7 @@ public class PlayerController : NetworkBehaviour
         move = this.transform.TransformDirection(move);
 
         characterController.SimpleMove(move * moveSpeed);
-
-        // Temporary fix, because GameUIManager.current doesn't populate until after this class' Start() method is run. Will need to fix later.
+                // Temporary fix, because GameUIManager.current doesn't populate until after this class' Start() method is run. Will need to fix later.
         GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
         GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
         GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
@@ -91,8 +90,10 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer) {
             GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
         }
+        if(isFiring){
+            fireWeapon();
+        }
     }
-
     void FixedUpdate() {
 
     }
@@ -148,15 +149,7 @@ public class PlayerController : NetworkBehaviour
 
     public void FireWeapon(InputAction.CallbackContext context){
 
-        if(context.performed){
-            float fireRate = this.currentWeaponObj.GetComponent<Weapon>().fireRate;
-            while(fireRate > 0 && isFiring){
-                fireRate -= 1;
-                GameObject projectile = Instantiate(this.currentWeaponObj.GetComponent<Weapon>().weaponProjectile.projectileObject, weaponAnchor.transform.position, Quaternion.identity);
-                projectile.GetComponent<Rigidbody>().AddForce(Vector3.forward * this.currentWeaponObj.GetComponent<Weapon>().weaponProjectile.flyingSpeed * 5);
-                StartCoroutine(FireCooldown(fireRate));
-            }
-        }
+
     }
 
     #endregion
@@ -221,7 +214,6 @@ public class PlayerController : NetworkBehaviour
                 currentWeapon = weaponSet;
             }
         }
-
         // Checking for if the selected weapon is valid. This is a clunky way of doing it, admittedly, but it will do for now.
         while (weaponsInBag[currentWeapon].isInBag == false) {
             if (weaponSwitch >= 0) {
@@ -250,6 +242,15 @@ public class PlayerController : NetworkBehaviour
         GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
     }
 
+    void fireWeapon(){
+        float fireRate = GameManager.current.weapons[currentWeapon].fireRate;
+        while(fireRate > 0){
+            fireRate -= 1;
+            GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
+            bullet.GetComponent<Rigidbody>().AddForce(Vector3.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 1000);
+            StartCoroutine(FireCooldown(fireRate));
+        }
+    }
     public void AddWeapon(int weapon, int ammo = 0) 
     {
         WeaponSlot weaponSlot = weaponsInBag[weapon];

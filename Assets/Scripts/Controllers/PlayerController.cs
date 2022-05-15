@@ -13,8 +13,6 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Variables")]
 
-    [SerializeField] float stepLength = 1f;
-
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
@@ -28,6 +26,7 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Sound Values")]
     [SerializeField] float footstepVolume;
+    [SerializeField] float stepLength = 1f;
 
     [Header("Weapon Values")]
     [SerializeField] WeaponSlot[] weaponsInBag;

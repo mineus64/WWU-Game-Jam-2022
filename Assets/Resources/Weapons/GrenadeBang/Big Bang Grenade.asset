@@ -18,6 +18,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Universal
   weaponIcon: {fileID: 21300000, guid: abd406a59e3f6ff4c993c10485330ab4, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: df50b26794966ba4f9327f2fbdeea6fd, type: 3}
+  weaponProjectile: {fileID: 0}
   fireRate: 5
   magSize: 1
   maxAmmo: 3
@@ -25,3 +26,5 @@ MonoBehaviour:
   weaponNoise: 100
   damage: 0
   spread: 0
+  penetrates: 0
+  explodes: 1

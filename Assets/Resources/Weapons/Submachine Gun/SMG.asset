@@ -19,6 +19,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Pumped Up
   weaponIcon: {fileID: 21300000, guid: fe93b91cf6ecf9d438d190b79d66c922, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: b2887a27742fdae40ac50b58bec77bd6, type: 3}
+  weaponProjectile: {fileID: 2807294627706880356, guid: 2ddab97aa79a3b541b4034dd063f7f96, type: 3}
   fireRate: 30
   magSize: 30
   maxAmmo: 150
@@ -26,3 +27,5 @@ MonoBehaviour:
   weaponNoise: 45
   damage: 10
   spread: 0
+  penetrates: 0
+  explodes: 0

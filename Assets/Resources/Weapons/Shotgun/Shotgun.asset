@@ -19,6 +19,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Boomstick
   weaponIcon: {fileID: 21300000, guid: 9b3399a860e0a5d4f828c0ab3daff439, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: 9692573df6e32ec4b94454f422a54786, type: 3}
+  weaponProjectile: {fileID: 6713447965424871012, guid: 2160349f291c5f141a6c2b1be76ecc9a, type: 3}
   fireRate: 1
   magSize: 6
   maxAmmo: 30
@@ -26,3 +27,5 @@ MonoBehaviour:
   weaponNoise: 50
   damage: 15
   spread: 0
+  penetrates: 0
+  explodes: 0

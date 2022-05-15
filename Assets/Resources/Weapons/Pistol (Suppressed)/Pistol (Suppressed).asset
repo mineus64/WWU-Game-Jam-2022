@@ -18,6 +18,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Elegant
   weaponIcon: {fileID: 21300000, guid: 0eef02a1a1418b9419367826dc7669b2, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: 6e2555bb1b735134494fbb9438c93245, type: 3}
+  weaponProjectile: {fileID: 2807294627706880356, guid: 2ddab97aa79a3b541b4034dd063f7f96, type: 3}
   fireRate: 2
   magSize: 8
   maxAmmo: 40
@@ -25,3 +26,5 @@ MonoBehaviour:
   weaponNoise: 5
   damage: 15
   spread: 0
+  penetrates: 0
+  explodes: 0

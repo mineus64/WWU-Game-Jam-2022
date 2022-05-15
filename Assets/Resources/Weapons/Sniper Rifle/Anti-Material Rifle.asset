@@ -19,6 +19,7 @@ MonoBehaviour:
   weaponNoiseCosmetic: Penetrating
   weaponIcon: {fileID: 21300000, guid: 8bde3fea6100eae4cafe76c9870b3220, type: 3}
   weaponObject: {fileID: 919132149155446097, guid: 728f53ba48592f94a932dc554ad254b4, type: 3}
+  weaponProjectile: {fileID: 4222634955373227125, guid: 2634a3c9cf5cab84dbfc641a34660aca, type: 3}
   fireRate: 1
   magSize: 5
   maxAmmo: 25
@@ -26,3 +27,5 @@ MonoBehaviour:
   weaponNoise: 75
   damage: 150
   spread: 0
+  penetrates: 1
+  explodes: 0

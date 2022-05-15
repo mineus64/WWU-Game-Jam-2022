@@ -16,7 +16,7 @@ public class Weapon : ScriptableObject
     [Header("Weapon Object")]
     public GameObject weaponObject;
 
-    public Projectile weaponProjectile;
+    public GameObject weaponProjectile;
 
     [Header("Weapon Attributes")]
     public float fireRate;      // RPS

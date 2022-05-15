@@ -255,7 +255,13 @@ public class PlayerController : NetworkBehaviour
     {
         WeaponSlot weaponSlot = weaponsInBag[weapon];
 
-        weaponSlot.isInBag = true;
+        if (weaponSlot.isInBag == false) {
+            weaponSlot.isInBag = true;
+
+            weaponSlot.magAmmo = Mathf.Min(weaponSlot.weapon.magSize, ammo);
+
+            ammo -= weaponSlot.magAmmo;
+        }
 
         weaponSlot.reserveAmmo = Mathf.Min(weaponSlot.reserveAmmo + ammo, weaponSlot.weapon.maxAmmo);
     }

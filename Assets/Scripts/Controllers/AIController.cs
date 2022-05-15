@@ -275,7 +275,7 @@ public class AIController : NetworkBehaviour
             float stepTime = stepLength*0f;
 
             stepTime = stepLength*.59f;
-            
+
             float totalTime = 0f;
             while (totalTime < stepTime){
                 totalTime += Time.deltaTime;
@@ -293,6 +293,37 @@ public class AIController : NetworkBehaviour
         currentSound.SetProperties(footstepVolume);
     }
 
+    public void SetHealth(float healthSet) 
+    {
+        currentHealth = healthSet;
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void DeltaHealth(float healthDelta) 
+    {
+        currentHealth += healthDelta;
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void Die() 
+    {
+
+    }
+
     #endregion
 }
 
@@ -301,5 +332,6 @@ enum AIBehaviour
     Patrolling,
     Searching,
     Attacking,
-    Retreating
+    Retreating,
+    Dead
 }

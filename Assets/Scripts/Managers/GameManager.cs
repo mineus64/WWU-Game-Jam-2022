@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     [Header("Components")]
     public NetworkManager networkManager;
 
+    [Header("Global Variables")]
+    public PlayerController currentClient;
+
     #endregion
 
     #region General Methods

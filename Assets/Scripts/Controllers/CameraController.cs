@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetParent(GameManager.current.currentClient.gameObject);
     }
 
     // Update is called once per frame
@@ -41,7 +41,11 @@ public class CameraController : MonoBehaviour
 
     #region Specific Methods
 
-
+    public void SetParent(GameObject parent) 
+    {
+        this.transform.SetParent(parent.transform);
+        this.transform.position = parent.transform.position;
+    }
 
     #endregion
 }

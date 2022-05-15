@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
+    [SerializeField] GameObject cameraAnchor;
 
     [Header("Movement Values")]
     [SerializeField] Vector3 movement;
@@ -31,7 +32,7 @@ public class PlayerController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         // Todo on all players
         if (characterController == null) {
             characterController = this.GetComponent<CharacterController>();
@@ -39,7 +40,7 @@ public class PlayerController : NetworkBehaviour
 
         // Todo only if this player is the current client's player
         if (isLocalPlayer) {
-            
+            GameManager.current.currentClient = this;
         }
 
         // Todo only if this player is NOT the current client's player
@@ -57,6 +58,7 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+
         characterController.Move(movement * moveSpeed * Time.deltaTime);
     }
 

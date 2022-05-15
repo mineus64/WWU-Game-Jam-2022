@@ -1,0 +1,15 @@
+1652306655|Initial commit
+1652306765|Initial Commit
+1652560897|Installed Universal Render Pipeline
+1652560975|Restructured Project Folder
+1652561120|Imported ProBuilder
+1652561394|Imported Input System
+1652561598|Imported Post Processing
+1652561882|Imported Mirror
+1652562117|Imported Kenney Weapons
+1652562392|Set Up Scenes
+1652563437|Added GameManager
+1652565564|Created Main Menu
+1652568464|Added Main Menu Functionality
+1652569707|Added GameSettings
+1652572018|Created Prefabs

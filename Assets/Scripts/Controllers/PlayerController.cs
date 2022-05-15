@@ -10,11 +10,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
-
+    bool isStopped;
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] public GameObject cameraAnchor;
+
+    [SerializeField] Rigidbody rb;
 
     [Header("Movement Values")]
     [SerializeField] WalkState walkState;
@@ -46,6 +48,7 @@ public class PlayerController : NetworkBehaviour
         // Todo only if this player is the current client's player
         if (isLocalPlayer) {
             GameManager.current.currentClient = this;
+            StartCoroutine(StepCountdown());
         }
 
         // Todo only if this player is NOT the current client's player
@@ -67,20 +70,10 @@ public class PlayerController : NetworkBehaviour
         move = this.transform.TransformDirection(move);
 
         characterController.SimpleMove(move * moveSpeed);
-
     }
 
     void FixedUpdate() {
-
-        // Spawn footstep objects
-        if (movement != Vector3.zero) {
-            float randValue = Random.Range(0, 1000);
-
-            if (randValue <= moveSpeed) {
-                SpawnSound();
-            }
-        }
-
+        Debug.Log(characterController.velocity.magnitude);
     }
 
     #endregion
@@ -128,8 +121,33 @@ public class PlayerController : NetworkBehaviour
         currentSound.SetProperties(footstepVolume);
     }
 
+    IEnumerator StepCountdown(){
+        while(true){
+            float stepTime = 0f;
+            if (characterController.velocity.magnitude > 6){
+                stepTime = .43f;
+            } else if (characterController.velocity.magnitude > 4){
+                stepTime = .59f;
+            } else if (characterController.velocity.magnitude > 2){
+                stepTime = 1.25f;
+            } else{
+                yield return null;
+                continue;
+            }
+            float totalTime = 0f;
+            while (totalTime < stepTime){
+                totalTime += Time.deltaTime;
+                yield return null;
+            }
+            SpawnSound();
+            yield return null;
+        }
+    }
+
     #endregion
 }
+
+
 
 #region Enums
 
@@ -137,7 +155,8 @@ public enum WalkState
 {
     Walking,
     Jogging,
-    Running
+    Running,
+    Stopped
 }
 
 #endregion

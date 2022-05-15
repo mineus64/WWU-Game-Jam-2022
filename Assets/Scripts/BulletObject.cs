@@ -5,10 +5,12 @@ using UnityEngine;
 public class BulletObject : MonoBehaviour
 {
     public float FiringSpeed;
+    public float Damage;
 
-    public BulletObject(float firingSpeed){
+    public void Initialize(float firingSpeed, float damage){
 
         FiringSpeed = firingSpeed;
+        Damage = damage;
 
     }
 
@@ -19,6 +21,9 @@ public class BulletObject : MonoBehaviour
     }
     public void OnCollisionEnter(Collision col){
         if (!col.gameObject.CompareTag("Player")){
+            if (col.gameObject.CompareTag("Enemy")){
+                col.gameObject.GetComponent<AIController>().DeltaHealth(-Damage);
+            }
         Destroy(this.gameObject);
         }
 

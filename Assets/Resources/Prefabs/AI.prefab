@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8479235008822263387}
   m_Layer: 0
   m_Name: AI
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  currentPos: {x: 0, y: 0, z: 0}
+  lastPos: {x: 0, y: 0, z: 0}
   characterController: {fileID: 6458103525281268990}
   weaponAnchor: {fileID: 0}
   movement: {x: 0, y: 0, z: 0}

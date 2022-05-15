@@ -99,6 +99,7 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   expansionRate: 2.5
+  fadeRate: 5
   volume: 0
   sphere: {fileID: 6164822150987303646}
   sphereRenderer: {fileID: 2309156191557916358}

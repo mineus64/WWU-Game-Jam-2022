@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
     [Header("Objects")]
     public GameObject sound;
     public Weapon[] weapons;
+    [SerializeField] GameObject AI;
+
+    [Header("Spawn Points")]
+    [SerializeField] List<GameObject> spawnPoints;
+    [SerializeField] int numAI;
 
     #endregion
 
@@ -81,9 +86,34 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync(menuScene);
 
+        networkManager.StartHost();
+
         SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
 
-        networkManager.StartHost();
+        this.numAI = numAI;
+    }
+
+    public void SpawnPlayers() 
+    {
+        Debug.Log(string.Format("Spawning {0} AI", numAI));
+
+        List<GameObject> availableSpawns = spawnPoints;
+
+        int playerSpawn = (int)Random.Range(0, availableSpawns.Count - 1);
+
+        currentClient.transform.position = availableSpawns[playerSpawn].transform.position;
+
+        availableSpawns.Remove(availableSpawns[playerSpawn]);
+
+        for (int i = 0; i < numAI; i++) {
+            int spawnIndex = (int)Random.Range(0, availableSpawns.Count - 1);
+
+            GameObject thisAI = Instantiate(AI, availableSpawns[spawnIndex].transform.position, Quaternion.identity);
+
+            NetworkServer.Spawn(thisAI);
+
+            availableSpawns.Remove(availableSpawns[spawnIndex]);
+        }
     }
 
     #endregion

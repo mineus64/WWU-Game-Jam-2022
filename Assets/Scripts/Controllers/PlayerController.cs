@@ -56,11 +56,13 @@ public class PlayerController : NetworkBehaviour
         // Todo on all players
         if (characterController == null) {
             characterController = this.GetComponent<CharacterController>();
+
         }
 
         // Todo only if this player is the current client's player
         if (isLocalPlayer) {
             GameManager.current.currentClient = this;
+            GameManager.current.SpawnPlayers();
             StartCoroutine(StepCountdown());
         }
 

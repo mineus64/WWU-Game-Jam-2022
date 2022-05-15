@@ -6,7 +6,7 @@
             "id": "e9ad2e64-cf92-43e1-865e-1a8c9a3acf65",
             "actions": [
                 {
-                    "name": "Movement (WASD)",
+                    "name": "Move Backwards/Forwards",
                     "type": "Button",
                     "id": "8c764866-eb40-4b9f-998f-a0a7fb8578a1",
                     "expectedControlType": "Button",
@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Movement (Arrow Keys)",
+                    "name": "Move Left/Right",
                     "type": "Button",
                     "id": "b1f51405-a75e-4f6c-afe8-1f2c9fe8487f",
                     "expectedControlType": "Button",
@@ -26,13 +26,13 @@
             ],
             "bindings": [
                 {
-                    "name": "Backwards/Forwards",
+                    "name": "WASD",
                     "id": "32760a90-9c83-4977-8692-7061201430a2",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -43,7 +43,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -54,84 +54,84 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Strafe Left/Right",
+                    "name": "Arrow Keys",
                     "id": "3faee76c-8622-4ce9-ae8a-707061ae53ec",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "negative",
                     "id": "1be05175-eeb0-4a7f-9e42-8e8a8b740bae",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
                     "id": "6a41423c-8833-4c22-92ac-e43978941b11",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (WASD)",
+                    "action": "Move Backwards/Forwards",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Backwards/Forwards",
+                    "name": "WASD",
                     "id": "e4a009e2-1d39-4078-b7f7-b7982cc70a5e",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "negative",
                     "id": "979b2812-6c1d-4c9a-bb22-f3007ca517b3",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
                     "id": "add31535-d8dc-483a-bfec-e58d0692660b",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Strafe Left/Right",
+                    "name": "Arrow Keys",
                     "id": "be63fce6-3e0a-4f22-8998-27df260e214f",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -142,7 +142,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -153,7 +153,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Movement (Arrow Keys)",
+                    "action": "Move Left/Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

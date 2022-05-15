@@ -868,6 +868,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2298202664374931542, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+      propertyPath: playerInput
+      value: 
+      objectReference: {fileID: 5659874197415519917}
+    - target: {fileID: 2298202664374931542, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 5659874197415519919}
+    - target: {fileID: 5620339083496614362, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+      propertyPath: sceneId
+      value: 644162903
+      objectReference: {fileID: 0}
     - target: {fileID: 8237813052861565432, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -917,5 +929,88 @@ PrefabInstance:
 --- !u!4 &5659874197415519915 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8237813052861565432, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+  m_PrefabInstance: {fileID: 5659874197415519914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5659874197415519916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 362252952095491357, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+  m_PrefabInstance: {fileID: 5659874197415519914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5659874197415519917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659874197415519916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0d518f538e118634c86f1db956708dca, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5659874197415519918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: MoveForwardBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8c764866-eb40-4b9f-998f-a0a7fb8578a1
+    m_ActionName: Controls/Movement (WASD)[/Keyboard/s,/Keyboard/w,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5659874197415519918}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: StrafeLeftRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b1f51405-a75e-4f6c-afe8-1f2c9fe8487f
+    m_ActionName: Controls/Movement (Arrow Keys)[/Keyboard/downArrow,/Keyboard/upArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Controls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &5659874197415519918 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2298202664374931542, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
+  m_PrefabInstance: {fileID: 5659874197415519914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659874197415519916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f318b31c06f8b6e418156076ddd89302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!143 &5659874197415519919 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 1356177442651576243, guid: d625972129b512a4f825fbcb8bd68ded, type: 3}
   m_PrefabInstance: {fileID: 5659874197415519914}
   m_PrefabAsset: {fileID: 0}

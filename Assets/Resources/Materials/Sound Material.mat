@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Volume: 0.19235815
+    - Volume: 0.2573356
     - _AlphaClip: 0
     - _Blend: 0
     - _CastShadows: 0

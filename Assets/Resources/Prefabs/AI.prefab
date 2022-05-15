@@ -139,14 +139,14 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   baseMoveSpeed: 5
   moveSpeed: 0
-  footstepVolume: 0
-  stepLength: 1
+  footstepVolume: 15
+  stepLength: 5
   weaponsInBag: []
   currentWeapon: 0
   currentWeaponObj: {fileID: 0}
   isFiring: 0
-  currentHealth: 0
-  maxHealth: 0
+  currentHealth: 100
+  maxHealth: 100
   navMeshAgent: {fileID: 8479235008822263387}
   behaviour: 0
   playerTarget: {fileID: 0}

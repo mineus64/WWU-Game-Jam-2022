@@ -55,12 +55,13 @@ public class AIController : NetworkBehaviour
     void Start()
     {
         playerTarget = GameManager.current.currentClient;
+        StartCoroutine(StepCountdown());
     }
 
     // Update is called once per frame
     void Update()
     {
-        AITimer -= Time.deltaTime;
+        AITimer = Mathf.Max(AITimer - Time.deltaTime, 0.0f);
 
         if (AITimer > 0) {
             switch (behaviour) 
@@ -267,6 +268,29 @@ public class AIController : NetworkBehaviour
 
             SearchEnter();
         }
+    }
+
+    IEnumerator StepCountdown(){
+        while(true){
+            float stepTime = stepLength*0f;
+
+            stepTime = stepLength*.59f;
+            
+            float totalTime = 0f;
+            while (totalTime < stepTime){
+                totalTime += Time.deltaTime;
+                yield return null;
+            }
+            SpawnSound();
+            yield return null;
+        }
+    }
+
+    void SpawnSound() 
+    {
+        Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
+
+        currentSound.SetProperties(footstepVolume);
     }
 
     #endregion

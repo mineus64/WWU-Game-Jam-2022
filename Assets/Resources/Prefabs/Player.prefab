@@ -123,7 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  stepLength: 2.5
   characterController: {fileID: 1356177442651576243}
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
@@ -132,6 +131,7 @@ MonoBehaviour:
   baseMoveSpeed: 5
   moveSpeed: 5
   footstepVolume: 15
+  stepLength: 5
   weaponsInBag:
   - name: Pistol
     isInBag: 1

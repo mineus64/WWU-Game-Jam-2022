@@ -14,7 +14,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
-    [SerializeField] GameObject cameraAnchor;
+    [SerializeField] public GameObject cameraAnchor;
 
     [Header("Movement Values")]
     [SerializeField] Vector3 movement;
@@ -58,7 +58,10 @@ public class PlayerController : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        characterController.SimpleMove(movement * moveSpeed);
+        Vector3 move = Vector3.Normalize(movement);
+        move = this.transform.TransformDirection(move);
+
+        characterController.SimpleMove(move * moveSpeed);
     }
 
     #endregion

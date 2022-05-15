@@ -211,6 +211,8 @@ public class AIController : NetworkBehaviour
 
     void AttackBehaviour() 
     {
+        transform.LookAt(playerTarget.transform);
+
         if (currentHealth <= 20.0f) {
             behaviour = AIBehaviour.Retreating;
         }

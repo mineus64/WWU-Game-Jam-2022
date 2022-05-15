@@ -161,11 +161,11 @@ public class PlayerController : NetworkBehaviour
 
     #region Specific Methods
 
-    void SpawnSound() 
+    void SpawnSound(float volume) 
     {
         Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
 
-        currentSound.SetProperties(footstepVolume);
+        currentSound.SetProperties(volume);
     }
 
     IEnumerator StepCountdown(){
@@ -186,7 +186,7 @@ public class PlayerController : NetworkBehaviour
                 totalTime += Time.deltaTime;
                 yield return null;
             }
-            SpawnSound();
+            SpawnSound(footstepVolume);
             yield return null;
         }
     }
@@ -257,6 +257,9 @@ public class PlayerController : NetworkBehaviour
             bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
             bullet.GetComponent<Transform>().SetParent(null, true);
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
+
+            SpawnSound(GameManager.current.weapons[currentWeapon].weaponNoise);
+
             yield return new WaitForSeconds(1/originalFireRate);
         }
         allowfire = true;

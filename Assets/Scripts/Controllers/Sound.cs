@@ -12,6 +12,7 @@ public class Sound : MonoBehaviour
     [SerializeField] AnimationCurve valuesOverTime;
     [SerializeField] Gradient colourRange;
     [SerializeField] float expansionRate;
+    [SerializeField] float fadeRate;
 
     [Header("Sound Properties")]
     [SerializeField] float volume;
@@ -37,7 +38,7 @@ public class Sound : MonoBehaviour
             Destroy(this.gameObject);
         }  
 
-        volume -= Time.deltaTime; 
+        volume -= fadeRate * Time.deltaTime; 
 
         transform.localScale += Vector3.one * (expansionRate * Time.deltaTime);
 

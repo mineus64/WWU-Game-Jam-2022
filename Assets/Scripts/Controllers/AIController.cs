@@ -113,31 +113,85 @@ public class AIController : NetworkBehaviour
         NavMeshHit hit;
 
         NavMesh.SamplePosition(patrolTarget, out hit, 2.0f, NavMesh.AllAreas);
+
+        navMeshAgent.SetDestination(hit.position);
     }
 
     void PatrolBehaviour() 
     {
+        RaycastHit hit = new RaycastHit();
 
+        Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
+
+        if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
+            if (hit.transform.GetComponent<PlayerController>() != null) {
+                behaviour = AIBehaviour.Attacking;
+            }
+        }
     }
 
     void PatrolExit() 
     {
+        float random = Random.Range(0, 1);
 
+        if (random >= 0.5) {
+            behaviour = AIBehaviour.Patrolling;
+
+            AITimer = 10.0f;
+
+            PatrolEnter();
+        }
+        else {
+            behaviour = AIBehaviour.Searching;
+
+            AITimer = 5.0f;
+
+            SearchEnter();
+        }
     }
 
     void SearchEnter() 
     {
+        patrolTarget = playerTarget.transform.position;
 
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(patrolTarget, out hit, 2.0f, NavMesh.AllAreas);
+
+        navMeshAgent.SetDestination(hit.position);
     }
 
     void SearchBehaviour() 
     {
+        RaycastHit hit = new RaycastHit();
 
+        Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
+
+        if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
+            if (hit.transform.GetComponent<PlayerController>() != null) {
+                behaviour = AIBehaviour.Attacking;
+            }
+        }
     }
 
     void SearchExit() 
     {
+        float random = Random.Range(0, 1);
 
+        if (random >= 0.5) {
+            behaviour = AIBehaviour.Patrolling;
+
+            AITimer = 10.0f;
+
+            PatrolEnter();
+        }
+        else {
+            behaviour = AIBehaviour.Searching;
+
+            AITimer = 5.0f;
+
+            SearchEnter();
+        }
     }
 
     void AttackEnter() 
@@ -147,7 +201,17 @@ public class AIController : NetworkBehaviour
 
     void AttackBehaviour() 
     {
+        if (currentHealth <= 20.0f) {
+            behaviour = AIBehaviour.Retreating;
+        }
 
+        RaycastHit hit = new RaycastHit();
+
+        Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
+
+        if (!Physics.Raycast(this.transform.position, rayDirection, out hit)) {
+            behaviour = AIBehaviour.Searching;
+        }
     }
 
     void AttackExit() 

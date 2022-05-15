@@ -135,19 +135,19 @@ public class AIController : NetworkBehaviour
 
     void PatrolExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= 0.25) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }
@@ -179,19 +179,19 @@ public class AIController : NetworkBehaviour
 
     void SearchExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= 0.25) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }
@@ -221,6 +221,8 @@ public class AIController : NetworkBehaviour
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
             if (hit.transform != playerTarget.gameObject) {
                 behaviour = AIBehaviour.Searching;
+
+                AITimer = 2.5f;
             }
         }
 
@@ -275,19 +277,19 @@ public class AIController : NetworkBehaviour
 
     void RetreatExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= 0.25) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }

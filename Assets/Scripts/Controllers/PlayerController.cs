@@ -25,6 +25,21 @@ public class PlayerController : NetworkBehaviour
     [Header("Sound Values")]
     [SerializeField] float footstepVolume;
 
+    [Header("Weapon Values")]
+    [SerializeField] bool[] weaponsInBag = 
+    {
+        true,       // 
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    };
+
     #endregion
 
     #region General Methods
@@ -85,7 +100,7 @@ public class PlayerController : NetworkBehaviour
 
     #endregion
 
-    #region Specific Methods
+    #region Input Handlers
 
     public void MoveForwardBack(InputAction.CallbackContext context) 
     {
@@ -121,11 +136,40 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public void SwitchWeapon(InputAction.CallbackContext context) 
+    {
+        Vector2 rawInput = context.ReadValue<Vector2>();
+
+        float refinedInput = rawInput.y;
+
+
+    }
+
+    #endregion
+
+    #region Specific Methods
+
     void SpawnSound() 
     {
         Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
 
         currentSound.SetProperties(footstepVolume);
+    }
+
+    void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
+    {
+        if (weaponSwitch == 0 && weaponSet == 0) {
+            return;
+        }
+        else {
+            if (weaponSwitch != 0) {
+
+            }
+
+            if (weaponSet != 0) {
+
+            }
+        }
     }
 
     #endregion

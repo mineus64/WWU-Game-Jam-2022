@@ -10,17 +10,18 @@ using UnityEngine.InputSystem;
 public class PlayerController : NetworkBehaviour
 {
     #region Variables
-    bool isStopped;
+
+    [Header("Variables")]
+
+    [SerializeField] float stepLength = 1f;
+
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] public GameObject cameraAnchor;
     [SerializeField] GameObject weaponAnchor;
 
-    [SerializeField] Rigidbody rb;
-
     [Header("Movement Values")]
-    [SerializeField] WalkState walkState;
     [SerializeField] Vector3 movement;
     [SerializeField] float baseMoveSpeed;
     [SerializeField] float moveSpeed;
@@ -145,18 +146,6 @@ public class PlayerController : NetworkBehaviour
 
         moveSpeed = baseMoveSpeed + (movement * (baseMoveSpeed * 0.5f));
 
-        switch (movement) 
-        {
-            case < 0:
-                walkState = WalkState.Walking;
-                break;
-            case > 0:
-                walkState = WalkState.Running;
-                break;
-            default:
-                walkState = WalkState.Jogging;
-                break;
-        }
     }
 
     public void SwitchWeapon(InputAction.CallbackContext context) 
@@ -181,13 +170,13 @@ public class PlayerController : NetworkBehaviour
 
     IEnumerator StepCountdown(){
         while(true){
-            float stepTime = 0f;
+            float stepTime = stepLength*0f;
             if (characterController.velocity.magnitude > 6){
-                stepTime = .43f;
+                stepTime = stepLength*.43f;
             } else if (characterController.velocity.magnitude > 4){
-                stepTime = .59f;
+                stepTime = stepLength*.59f;
             } else if (characterController.velocity.magnitude > 2){
-                stepTime = 1.25f;
+                stepTime = stepLength*1.25f;
             } else{
                 yield return null;
                 continue;
@@ -249,17 +238,3 @@ public class PlayerController : NetworkBehaviour
 
     #endregion
 }
-
-
-
-#region Enums
-
-public enum WalkState 
-{
-    Walking,
-    Jogging,
-    Running,
-    Stopped
-}
-
-#endregion

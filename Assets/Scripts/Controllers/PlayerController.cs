@@ -74,10 +74,6 @@ public class PlayerController : NetworkBehaviour
         }
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
-
-        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
-        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
-        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
     }
 
     // Update is called once per frame
@@ -87,12 +83,18 @@ public class PlayerController : NetworkBehaviour
         move = this.transform.TransformDirection(move);
 
         characterController.SimpleMove(move * moveSpeed);
+                // Temporary fix, because GameUIManager.current doesn't populate until after this class' Start() method is run. Will need to fix later.
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
+        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
 
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
+        }
         if(isFiring){
             fireWeapon();
         }
     }
-
     void FixedUpdate() {
 
     }
@@ -185,10 +187,10 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-        IEnumerator FireCooldown(float rateOfFire){
-            new WaitForSeconds(1/rateOfFire);
-            yield return null;
-        }
+    IEnumerator FireCooldown(float rateOfFire){
+        new WaitForSeconds(1/rateOfFire);
+        yield return null;
+    }
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
@@ -250,9 +252,38 @@ public class PlayerController : NetworkBehaviour
             StartCoroutine(FireCooldown(fireRate));
         }
     }
+    public void AddWeapon(int weapon, int ammo = 0) 
+    {
+        WeaponSlot weaponSlot = weaponsInBag[weapon];
+
+        if (weaponSlot.isInBag == false) {
+            weaponSlot.isInBag = true;
+
+            weaponSlot.magAmmo = Mathf.Min(weaponSlot.weapon.magSize, ammo);
+
+            ammo -= weaponSlot.magAmmo;
+
+            GameUIManager.current.WeaponPickup(weapon);
+        }
+        else {
+            GameUIManager.current.AmmoPickup(weapon);
+        }
+
+        weaponSlot.reserveAmmo = Mathf.Min(weaponSlot.reserveAmmo + ammo, weaponSlot.weapon.maxAmmo);
+    }
+
+    public void RemoveWeapon(int weapon) 
+    {
+        weaponsInBag[weapon].isInBag = false;
+    }
+
     public void SetHealth(float healthSet) 
     {
         currentHealth = healthSet;
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
 
         if (currentHealth <= 0) {
             Die();
@@ -262,6 +293,10 @@ public class PlayerController : NetworkBehaviour
     public void DeltaHealth(float healthDelta) 
     {
         currentHealth += healthDelta;
+
+        if (isLocalPlayer) {
+            GameUIManager.current.UpdateHealth(currentHealth, maxHealth);
+        }
 
         if (currentHealth <= 0) {
             Die();

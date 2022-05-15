@@ -28,3 +28,46 @@
 1652589199|Actually added the map this time
 1652589281|Added Sound Object
 1652590593|Added Sound Shader
+1652592518|Updated Sound Material
+1652592557|Collisions!
+1652593245|Added Sprinting and Walking
+1652596619|Added Sound Spawning
+1652596731|Trying to fix camera x clamp
+1652596981|Updated Main Scene
+1652597205|Updated Lighting
+1652597272|Updated Shader Graph
+1652601902|Atmosphere
+1652602500|Updated Environment Properties
+1652603023|Fixed camera clamp bug completely :)
+1652603129|Weapon
+1652603456|Wrapped it Up in a Coroutine
+1652604285|Added Walk States
+1652604732|Removed Redundant and Unused Weapons
+1652605186|Added Weapon Sprites
+1652605346|Reorganised Weapons Folder
+1652606644|Added Example Weapons
+1652607116|Adjusted Weapon Model Scale
+1652607177|Fixed Broken Test Map Scale
+1652612404|Adjusted Player Camera
+1652612665|Added Player Weapon Handling
+1652613585|Added Weapon Spawning
+1652617353|Added step sounds
+1652617458|Fixed merge issue
+1652618306|Made step length easier to modify
+1652618422|Updated Weapon Handling
+1652618980|Imported Ammo
+1652619044|Fixed stepLength, removed walkState
+1652619315|Fixed Weapon Switching
+1652619577|Adjusted Step Length
+1652620202|Dimmed the Walls
+1652620408|Working on implementing the ammo
+1652620492|Floor Now Brighter
+1652622258|Added a GameUIManager
+1652622942|Added a Basic Weapon UI
+1652623771|Fixed Ammo Counter
+1652623993|Added Weapon Icon Switching
+1652624146|Added Health Mechanics
+1652624606|Added Firing
+1652624763|Added ammo, assigned to weapons, began work on fire method
+1652625508|**BUGGED** Added fire control
+1652625740|Added Health Handling

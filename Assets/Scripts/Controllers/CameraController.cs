@@ -15,6 +15,8 @@ public class CameraController : MonoBehaviour
 
     #region Variables
 
+    float verticalRotation = 0.0f;
+
     [Header("Objects")]
     [SerializeField] GameObject camParent;
 
@@ -23,8 +25,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] float verticalSensitivity = 1.0f;
 
     [Header("Constraints")]
-    [SerializeField] float maxLookUp = -75.0f;
-    [SerializeField] float minLookDown = 60.0f;
+    [SerializeField] float upDownLock = 15f;
 
     #endregion
 
@@ -52,6 +53,8 @@ public class CameraController : MonoBehaviour
         // Horizontal rotation
         camParent.transform.Rotate(new Vector3(0.0f, mouseMove.y, 0.0f));
 
+
+
         /*
         camParent.transform.eulerAngles = new Vector3(
             0.0f,
@@ -61,17 +64,23 @@ public class CameraController : MonoBehaviour
         */
 
         // Vertical Rotation
-        this.transform.Rotate(new Vector3(-mouseMove.x, 0.0f, 0.0f));
+        verticalRotation += -mouseMove.x;
 
+        this.transform.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+
+        if (verticalRotation < -upDownLock) verticalRotation = -upDownLock;
+        if (verticalRotation > upDownLock + 10) verticalRotation = upDownLock + 10;
         // I KNOW THIS ISN'T CONSTRAINED BUT I HAVE BEEN TRYING TO FIX IT AND IT DOESN'T WORK
         // YOU FIX IT
 
         this.transform.eulerAngles = new Vector3(
-            //Mathf.Clamp(this.transform.eulerAngles.x, maxLookUp,minLookDown),
             this.transform.eulerAngles.x,
             this.transform.eulerAngles.y,
             0.0f
         );
+
+        
+
     }
 
     void LateUpdate() {
@@ -91,4 +100,4 @@ public class CameraController : MonoBehaviour
     }
 
     #endregion
-}
+};

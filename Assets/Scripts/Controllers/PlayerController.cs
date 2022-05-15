@@ -33,6 +33,11 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] WeaponSlot[] weaponsInBag;
     [SerializeField] int currentWeapon = 0;
     [SerializeField] GameObject currentWeaponObj;
+    [SerializeField] bool isFiring;
+
+    [Header("Health Values")]
+    [SerializeField] float currentHealth;
+    [SerializeField] float maxHealth;
 
     #endregion
 
@@ -69,6 +74,10 @@ public class PlayerController : NetworkBehaviour
         }
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
+
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
+        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
     }
 
     // Update is called once per frame
@@ -120,8 +129,20 @@ public class PlayerController : NetworkBehaviour
             SetWeapon(refinedInput);
         }
     }
+    public void Fire(InputAction.CallbackContext context) 
+    {
+        if (context.started) {
+            isFiring = true;
+        }
+        else if (context.performed) {
+            isFiring = true;
+        }
+        else if (context.canceled) {
+            isFiring = false;
+        }
+    }
 
-    // public void FireWeapon(InputAction.CallbackContext context){
+    //public void FireWeapon(InputAction.CallbackContext context){
 
     //     if(context.performed){
     //         float fireRate = this.currentWeaponObj.GetComponent<Weapon>().fireRate;
@@ -217,6 +238,33 @@ public class PlayerController : NetworkBehaviour
         Destroy(currentWeaponObj);
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
+
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
+        GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
+    }
+
+    public void SetHealth(float healthSet) 
+    {
+        currentHealth = healthSet;
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void DeltaHealth(float healthDelta) 
+    {
+        currentHealth += healthDelta;
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void Die() 
+    {
+
     }
 
     #endregion
@@ -244,6 +292,8 @@ public class WeaponSlot
     public bool isInBag;
     public int magAmmo;
     public int reserveAmmo;
+
+    public Weapon weapon;
 
     #endregion
 }

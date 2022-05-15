@@ -136,44 +136,57 @@ MonoBehaviour:
     isInBag: 1
     magAmmo: 16
     reserveAmmo: 32
+    weapon: {fileID: 11400000, guid: 4a67f209ca074304fba73ff40ed24299, type: 2}
   - name: Anti-Material Rifle
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: 9263703f1b0b9f24486d8893ad2996ca, type: 2}
   - name: Assault Rifle
     isInBag: 1
     magAmmo: 30
     reserveAmmo: 60
+    weapon: {fileID: 11400000, guid: 4bde72a183781b64892004fb306d59cd, type: 2}
   - name: Big Bang Grenade
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: 4c92316f1369b694a9d1016739e7ecb9, type: 2}
   - name: Decoy Grenade
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: bf3e1153380a98640939a35cc4cbd82e, type: 2}
   - name: Frag Grenade
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: 82c956fa617543b46b8af612fb8a486a, type: 2}
   - name: Pistol (Suppressed)
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: d4ba1aa7971a77449974f0b23c078acb, type: 2}
   - name: Rocket Launcher
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: d1e9cbc9a012c4c41b1a3576020f51eb, type: 2}
   - name: Shotgun
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: 09c4290aa9b6f6042a5d524afdbfe68e, type: 2}
   - name: SMG
     isInBag: 0
     magAmmo: 0
     reserveAmmo: 0
+    weapon: {fileID: 11400000, guid: 156704d95d1df4a4398bf79983512da7, type: 2}
   currentWeapon: 0
   currentWeaponObj: {fileID: 0}
+  isFiring: 0
+  currentHealth: 0
+  maxHealth: 0
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,12 +296,12 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2298202664374931542}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Fire
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

@@ -10,13 +10,10 @@ public class Projectile : ScriptableObject
 
     [Header("Projectile Object")]
 
-    public GameObject weaponObject;
+    public GameObject projectileObject;
 
     [Header("Projectile Attributes")]
 
     public float flyingSpeed;
-    public bool explodes;
-
-    public bool penetrates;
     
 }

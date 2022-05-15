@@ -52,14 +52,16 @@ public class CameraController : MonoBehaviour
         // Horizontal rotation
         camParent.transform.Rotate(new Vector3(0.0f, mouseMove.y, 0.0f));
 
+        /*
         camParent.transform.eulerAngles = new Vector3(
             0.0f,
             camParent.transform.eulerAngles.y,
             0.0f
         );
+        */
 
         // Vertical Rotation
-        this.transform.Rotate(new Vector3(-mouseMove.x, mouseMove.y, 0.0f));
+        this.transform.Rotate(new Vector3(-mouseMove.x, 0.0f, 0.0f));
 
         // I KNOW THIS ISN'T CONSTRAINED BUT I HAVE BEEN TRYING TO FIX IT AND IT DOESN'T WORK
         // YOU FIX IT

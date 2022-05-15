@@ -85,7 +85,7 @@ public class PlayerController : NetworkBehaviour
 
     public void SprintWalk(InputAction.CallbackContext context) 
     {
-        float moveSpeed = baseMoveSpeed + context.ReadValue<float>();
+        moveSpeed = baseMoveSpeed + (context.ReadValue<float>() * (baseMoveSpeed * 0.5f));
     }
 
     #endregion

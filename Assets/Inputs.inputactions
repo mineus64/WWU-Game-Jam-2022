@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Weapon Switch",
+                    "type": "Button",
+                    "id": "516ed45b-b449-41f7-b499-0504c7d6cd1c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -198,6 +207,17 @@
                     "action": "Sprint/Walk",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9ee61f6d-6f2e-433b-ba85-13a7fd1952e5",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Weapon Switch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

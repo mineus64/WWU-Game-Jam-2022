@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] CharacterController characterController;
     [SerializeField] PlayerInput playerInput;
     [SerializeField] public GameObject cameraAnchor;
+    [SerializeField] GameObject weaponAnchor;
 
     [Header("Movement Values")]
     [SerializeField] WalkState walkState;
@@ -38,6 +39,34 @@ public class PlayerController : NetworkBehaviour
         false,      // Rocket Launcher
         false,      // Shotgun
         false       // SMG
+    };
+    [SerializeField] int currentWeapon = 0;
+    [SerializeField] GameObject currentWeaponObj;
+    [SerializeField] int[] currentAmmo =    // The amount of ammo currently loaded in the given weapon's magazine
+    {
+        16,         // Pistol
+        0,          // Anti-Material Rifle
+        0,          // Assault Rifle
+        0,          // Big Bang Grenade
+        0,          // Decoy Grenade
+        0,          // Frag Grenade
+        0,          // Pistol (Suppressed)
+        0,          // Rocket Launcher
+        0,          // Shotgun
+        0           // SMG
+    };
+    [SerializeField] int[] reserveAmmo =    // The amount of reserve ammo available for the current weapon
+    {
+        32,         // Pistol
+        0,          // Anti-Material Rifle
+        0,          // Assault Rifle
+        0,          // Big Bang Grenade
+        0,          // Decoy Grenade
+        0,          // Frag Grenade
+        0,          // Pistol (Suppressed)
+        0,          // Rocket Launcher
+        0,          // Shotgun
+        0           // SMG
     };
 
     #endregion
@@ -73,6 +102,7 @@ public class PlayerController : NetworkBehaviour
 
         }
 
+        currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
     }
 
     // Update is called once per frame
@@ -142,7 +172,7 @@ public class PlayerController : NetworkBehaviour
 
         float refinedInput = rawInput.y;
 
-
+        SetWeapon((int)Mathf.Clamp(refinedInput, -1.0f, 1.0f));
     }
 
     #endregion
@@ -161,15 +191,45 @@ public class PlayerController : NetworkBehaviour
         if (weaponSwitch == 0 && weaponSet == 0) {
             return;
         }
+
         else {
             if (weaponSwitch != 0) {
+                currentWeapon += weaponSwitch;
 
+                if (currentWeapon >= weaponsInBag.Length) {
+                    currentWeapon = 0;
+                }
+                else if (currentWeapon < weaponsInBag.Length) {
+                    currentWeapon = weaponsInBag.Length - 1;
+                }
             }
 
             if (weaponSet != 0) {
-
+                currentWeapon = weaponSet;
             }
         }
+
+        // Checking for if the selected weapon is valid. This is a clunky way of doing it, admittedly, but it will do for now.
+        while (weaponsInBag[currentWeapon] == false) {
+            if (weaponSwitch >= 0) {
+                currentWeapon += 1;
+
+                if (currentWeapon >= weaponsInBag.Length) {
+                    currentWeapon = 0;
+                }
+            }
+            else if (weaponSwitch < 0) {
+                currentWeapon -= 1;
+
+                if (currentWeapon < 0) {
+                    currentWeapon = weaponsInBag.Length - 1;
+                }
+            }
+        }
+
+        Destroy(currentWeaponObj);
+
+        currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
     }
 
     #endregion

@@ -67,6 +67,7 @@ public class CameraController : MonoBehaviour
         // YOU FIX IT
 
         this.transform.eulerAngles = new Vector3(
+            //Mathf.Clamp(this.transform.eulerAngles.x, maxLookUp,minLookDown),
             this.transform.eulerAngles.x,
             this.transform.eulerAngles.y,
             0.0f

@@ -25,6 +25,13 @@ public class PlayerController : NetworkBehaviour
 
     void Awake() 
     {
+        
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
         // Todo on all players
         if (characterController == null) {
             characterController = this.GetComponent<CharacterController>();
@@ -32,26 +39,19 @@ public class PlayerController : NetworkBehaviour
 
         // Todo only if this player is the current client's player
         if (isLocalPlayer) {
-
+            
         }
 
         // Todo only if this player is NOT the current client's player
         else {
-
-            /*
+            
             if (playerInput == null) {
                 playerInput = this.GetComponent<PlayerInput>();
             }
             Destroy(playerInput);
-            */
 
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame

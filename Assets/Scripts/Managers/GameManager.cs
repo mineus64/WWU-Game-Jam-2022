@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     [Header("Spawn Points")]
     [SerializeField] List<GameObject> spawnPoints;
     [SerializeField] int numAI;
+    [SerializeField] Difficulty aiDifficulty;
 
     #endregion
 
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(gameScene, LoadSceneMode.Additive);
 
         this.numAI = numAI;
+        this.aiDifficulty = AIDifficulty;
     }
 
     public void SpawnPlayers() 
@@ -109,6 +111,7 @@ public class GameManager : MonoBehaviour
             int spawnIndex = (int)Random.Range(0, availableSpawns.Count - 1);
 
             GameObject thisAI = Instantiate(AI, availableSpawns[spawnIndex].transform.position, Quaternion.identity);
+            thisAI.GetComponent<AIController>().aiDifficulty = this.aiDifficulty;
 
             NetworkServer.Spawn(thisAI);
 

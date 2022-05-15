@@ -37,6 +37,7 @@ public class AIController : NetworkBehaviour
 
     [Header("AI")]
     [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] public Difficulty aiDifficulty;
 
     [Header("AI Behaviour Values")]
     [SerializeField] AIBehaviour behaviour = AIBehaviour.Patrolling;
@@ -137,7 +138,7 @@ public class AIController : NetworkBehaviour
     {
         float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.25) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
             AITimer = 5.0f;
@@ -181,7 +182,7 @@ public class AIController : NetworkBehaviour
     {
         float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.25) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
             AITimer = 5.0f;
@@ -279,7 +280,7 @@ public class AIController : NetworkBehaviour
     {
         float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.25) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
             AITimer = 5.0f;
@@ -353,6 +354,23 @@ public class AIController : NetworkBehaviour
     public void Die() 
     {
 
+    }
+
+    float DifficultyBehaviorMod(Difficulty difficulty) 
+    {
+        switch (difficulty) 
+        {
+            case Difficulty.Easy:
+                return 0.10f;
+            case Difficulty.Normal:
+                return 0.25f;
+            case Difficulty.Hard:
+                return 0.50f;
+            case Difficulty.Insane:
+                return 0.75f;
+            default:
+                return 0.25f;
+        }
     }
 
     #endregion

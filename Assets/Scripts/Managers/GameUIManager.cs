@@ -47,12 +47,12 @@ public class GameUIManager : MonoBehaviour
 
     public void UpdateMagAmmoCount(int magAmmoCurrent, int magAmmoMax) 
     {
-        magAmmoCount.fillAmount = (magAmmoCurrent / magAmmoMax) / 0.5f;
+        magAmmoCount.fillAmount = ((float)magAmmoCurrent / (float)magAmmoMax) * 0.5f;
     }
 
     public void UpdateResAmmoCount(int resAmmoCurrent, int resAmmoMax) 
     {
-        resAmmoCount.fillAmount = (resAmmoCurrent / resAmmoMax) / 0.5f;
+        resAmmoCount.fillAmount = ((float)resAmmoCurrent / (float)resAmmoMax) * 0.5f;
     }
 
     public void UpdateWeaponIcon(Sprite weaponIcon) 

@@ -54,7 +54,7 @@ public class AIController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerTarget = GameManager.current.currentClient;
     }
 
     // Update is called once per frame
@@ -221,17 +221,52 @@ public class AIController : NetworkBehaviour
 
     void RetreatEnter() 
     {
+        patrolTarget = Vector3.Normalize(playerTarget.transform.position - this.transform.position);
 
+        patrolTarget = Quaternion.Euler(0.0f, 180.0f, 0.0f) * patrolTarget;
+
+        patrolTarget *= 20;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(patrolTarget, out hit, 20.0f, NavMesh.AllAreas);
+
+        navMeshAgent.SetDestination(hit.position);
     }
 
     void RetreatBehaviour() 
     {
+        RaycastHit hit = new RaycastHit();
 
+        Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
+
+        if (!Physics.Raycast(this.transform.position, rayDirection, out hit)) {
+            currentHealth = Mathf.Min(currentHealth + Time.deltaTime, 50);
+        }
+
+        if (currentHealth >= 50) {
+            RetreatExit();
+        }
     }
 
     void RetreatExit() 
     {
+        float random = Random.Range(0, 1);
 
+        if (random >= 0.5) {
+            behaviour = AIBehaviour.Patrolling;
+
+            AITimer = 10.0f;
+
+            PatrolEnter();
+        }
+        else {
+            behaviour = AIBehaviour.Searching;
+
+            AITimer = 5.0f;
+
+            SearchEnter();
+        }
     }
 
     #endregion

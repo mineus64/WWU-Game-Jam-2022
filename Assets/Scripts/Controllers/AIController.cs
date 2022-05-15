@@ -1,9 +1,22 @@
+// This script should be attached to the AI prefab. It handles AI logic etc.
+
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+
+[RequireComponent(typeof(CharacterController))]
+public class AIController : NetworkBehaviour
 {
+    #region Variables
+
+
+
+    #endregion
+
+    #region General Methods
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +28,12 @@ public class AIController : MonoBehaviour
     {
         
     }
+
+    #endregion
+
+    #region Specific Methods
+
+
+
+    #endregion
 }

@@ -5,7 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+[RequireComponent(typeof(CharacterController))]
+public class PlayerController : NetworkBehaviour
 {
     #region Variables
 
@@ -14,6 +15,16 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region General Methods
+
+    void Awake() 
+    {
+        if (isLocalPlayer) {
+
+        }
+        else {
+
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

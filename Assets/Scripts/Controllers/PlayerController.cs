@@ -67,8 +67,12 @@ public class PlayerController : NetworkBehaviour
 
         characterController.SimpleMove(move * moveSpeed);
 
+    }
+
+    void FixedUpdate() {
+
         // Spawn footstep objects
-        if (move != Vector3.zero) {
+        if (movement != Vector3.zero) {
             float randValue = Random.Range(0, 1000);
 
             if (randValue <= moveSpeed) {
@@ -77,6 +81,7 @@ public class PlayerController : NetworkBehaviour
                 currentSound.SetProperties(footstepVolume);
             }
         }
+
     }
 
     #endregion

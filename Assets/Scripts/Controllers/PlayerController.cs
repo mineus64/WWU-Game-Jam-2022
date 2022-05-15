@@ -69,6 +69,9 @@ public class PlayerController : NetworkBehaviour
         }
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
+
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
     }
 
     // Update is called once per frame
@@ -207,6 +210,9 @@ public class PlayerController : NetworkBehaviour
         Destroy(currentWeaponObj);
 
         currentWeaponObj = Instantiate(GameManager.current.weapons[currentWeapon].weaponObject, weaponAnchor.transform);
+
+        GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
+        GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
     }
 
     #endregion
@@ -234,6 +240,8 @@ public class WeaponSlot
     public bool isInBag;
     public int magAmmo;
     public int reserveAmmo;
+
+    public Weapon weapon;
 
     #endregion
 }

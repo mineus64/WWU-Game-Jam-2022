@@ -17,7 +17,7 @@ public class Weapon : ScriptableObject
     public GameObject weaponObject;
 
     [Header("Weapon Attributes")]
-    public float fireRate;      // RPM
+    public float fireRate;      // RPS
     public int magSize;
     public int maxAmmo;
     public float reloadTime;

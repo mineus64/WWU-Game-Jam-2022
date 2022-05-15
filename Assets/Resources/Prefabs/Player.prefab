@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7098201606001874996}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -123,6 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  allowfire: 0
+  fireRate: 0
+  stepLength: 2.5
   characterController: {fileID: 1356177442651576243}
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}

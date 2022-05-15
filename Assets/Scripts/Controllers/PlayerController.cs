@@ -29,47 +29,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] float footstepVolume;
 
     [Header("Weapon Values")]
-    [SerializeField] bool[] weaponsInBag = 
-    {
-        true,       // Pistol
-        false,      // Anti-Material Rifle
-        false,      // Assault Rifle
-        false,      // Big Bang Grenade
-        false,      // Decoy Grenade
-        false,      // Frag Grenade
-        false,      // Pistol (Suppressed)
-        false,      // Rocket Launcher
-        false,      // Shotgun
-        false       // SMG
-    };
+    [SerializeField] WeaponSlot[] weaponsInBag;
     [SerializeField] int currentWeapon = 0;
     [SerializeField] GameObject currentWeaponObj;
-    [SerializeField] int[] currentAmmo =    // The amount of ammo currently loaded in the given weapon's magazine
-    {
-        16,         // Pistol
-        0,          // Anti-Material Rifle
-        0,          // Assault Rifle
-        0,          // Big Bang Grenade
-        0,          // Decoy Grenade
-        0,          // Frag Grenade
-        0,          // Pistol (Suppressed)
-        0,          // Rocket Launcher
-        0,          // Shotgun
-        0           // SMG
-    };
-    [SerializeField] int[] reserveAmmo =    // The amount of reserve ammo available for the current weapon
-    {
-        32,         // Pistol
-        0,          // Anti-Material Rifle
-        0,          // Assault Rifle
-        0,          // Big Bang Grenade
-        0,          // Decoy Grenade
-        0,          // Frag Grenade
-        0,          // Pistol (Suppressed)
-        0,          // Rocket Launcher
-        0,          // Shotgun
-        0           // SMG
-    };
 
     #endregion
 
@@ -118,7 +80,7 @@ public class PlayerController : NetworkBehaviour
     }
 
     void FixedUpdate() {
-        Debug.Log(characterController.velocity.magnitude);
+
     }
 
     #endregion
@@ -163,9 +125,9 @@ public class PlayerController : NetworkBehaviour
     {
         Vector2 rawInput = context.ReadValue<Vector2>();
 
-        float refinedInput = rawInput.y;
+        int refinedInput = (int)Mathf.Clamp(rawInput.y, -1.0f, 1.0f);
 
-        SetWeapon((int)Mathf.Clamp(refinedInput, -1.0f, 1.0f));
+        SetWeapon(refinedInput);
     }
 
     #endregion
@@ -201,6 +163,7 @@ public class PlayerController : NetworkBehaviour
             yield return null;
         }
     }
+
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
     {
         if (weaponSwitch == 0 && weaponSet == 0) {
@@ -225,7 +188,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         // Checking for if the selected weapon is valid. This is a clunky way of doing it, admittedly, but it will do for now.
-        while (weaponsInBag[currentWeapon] == false) {
+        while (weaponsInBag[currentWeapon].isInBag == false) {
             if (weaponSwitch >= 0) {
                 currentWeapon += 1;
 
@@ -240,6 +203,8 @@ public class PlayerController : NetworkBehaviour
                     currentWeapon = weaponsInBag.Length - 1;
                 }
             }
+
+            Debug.Log(string.Format("CurrentWeapon: {0}: {1}", currentWeapon, weaponsInBag[currentWeapon]));      // DEBUG
         }
 
         Destroy(currentWeaponObj);
@@ -260,6 +225,23 @@ public enum WalkState
     Jogging,
     Running,
     Stopped
+}
+
+#endregion
+
+#region WeaponSlot
+
+[System.Serializable]
+public class WeaponSlot 
+{
+    #region Variables
+
+    public string name;
+    public bool isInBag;
+    public int magAmmo;
+    public int reserveAmmo;
+
+    #endregion
 }
 
 #endregion

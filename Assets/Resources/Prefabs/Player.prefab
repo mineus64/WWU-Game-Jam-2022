@@ -126,16 +126,15 @@ MonoBehaviour:
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
   weaponAnchor: {fileID: 3847762614197723888}
+  rb: {fileID: 5559318756357213752}
   walkState: 0
   movement: {x: 0, y: 0, z: 0}
   baseMoveSpeed: 5
   moveSpeed: 5
   footstepVolume: 15
-  weaponsInBag: 01000000000000000000
+  weaponsInBag: []
   currentWeapon: 0
   currentWeaponObj: {fileID: 0}
-  currentAmmo: 10000000000000000000000000000000000000000000000000000000000000000000000000000000
-  reserveAmmo: 20000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0

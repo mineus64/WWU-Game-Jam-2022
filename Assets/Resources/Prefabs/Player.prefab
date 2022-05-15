@@ -134,6 +134,7 @@ MonoBehaviour:
   baseMoveSpeed: 5
   moveSpeed: 5
   footstepVolume: 15
+  stepLength: 5
   weaponsInBag:
   - name: Pistol
     isInBag: 1

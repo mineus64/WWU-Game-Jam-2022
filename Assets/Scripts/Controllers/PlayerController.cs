@@ -34,6 +34,10 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] int currentWeapon = 0;
     [SerializeField] GameObject currentWeaponObj;
 
+    [Header("Health Values")]
+    [SerializeField] float currentHealth;
+    [SerializeField] float maxHealth;
+
     #endregion
 
     #region General Methods
@@ -215,6 +219,29 @@ public class PlayerController : NetworkBehaviour
         GameUIManager.current.UpdateMagAmmoCount(weaponsInBag[currentWeapon].magAmmo, weaponsInBag[currentWeapon].weapon.magSize);
         GameUIManager.current.UpdateResAmmoCount(weaponsInBag[currentWeapon].reserveAmmo, weaponsInBag[currentWeapon].weapon.maxAmmo);
         GameUIManager.current.UpdateWeaponIcon(weaponsInBag[currentWeapon].weapon.weaponIcon);
+    }
+
+    public void SetHealth(float healthSet) 
+    {
+        currentHealth = healthSet;
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void DeltaHealth(float healthDelta) 
+    {
+        currentHealth += healthDelta;
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    public void Die() 
+    {
+
     }
 
     #endregion

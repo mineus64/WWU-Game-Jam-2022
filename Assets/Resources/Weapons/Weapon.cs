@@ -9,7 +9,8 @@ public class Weapon : ScriptableObject
 
     [Header("Cosmetic")]
     public string weaponName;
-    public string weaponDesc;
+    [TextArea] public string weaponDesc;
+    public string weaponNoiseCosmetic;
     public Sprite weaponIcon;
 
     [Header("Weapon Object")]
@@ -19,7 +20,7 @@ public class Weapon : ScriptableObject
     public float fireRate;
     public int magSize;
     public int maxAmmo;
-    public int reloadTime;
+    public float reloadTime;
 
     [Header("Sound")]
     public float weaponNoise;

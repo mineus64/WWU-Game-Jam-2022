@@ -9,6 +9,14 @@ public class Weapon : ScriptableObject
 
 
     #endregion
+
+    #region General Methods
+
+    void Awake() 
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,4 +28,12 @@ public class Weapon : ScriptableObject
     {
         
     }
+
+    #endregion
+
+    #region Specific Methods
+
+
+
+    #endregion
 }

@@ -76,9 +76,7 @@ public class PlayerController : NetworkBehaviour
             float randValue = Random.Range(0, 1000);
 
             if (randValue <= moveSpeed) {
-                Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
-
-                currentSound.SetProperties(footstepVolume);
+                SpawnSound();
             }
         }
 
@@ -105,6 +103,13 @@ public class PlayerController : NetworkBehaviour
     public void SprintWalk(InputAction.CallbackContext context) 
     {
         moveSpeed = baseMoveSpeed + (context.ReadValue<float>() * (baseMoveSpeed * 0.5f));
+    }
+
+    void SpawnSound() 
+    {
+        Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
+
+        currentSound.SetProperties(footstepVolume);
     }
 
     #endregion

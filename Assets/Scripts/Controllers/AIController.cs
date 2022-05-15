@@ -10,7 +10,8 @@ using UnityEngine.AI;
 public class AIController : NetworkBehaviour
 {
     #region Variables
-
+    public Vector3 currentPos;
+    public Vector3 lastPos;
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject weaponAnchor;
@@ -44,7 +45,7 @@ public class AIController : NetworkBehaviour
     [SerializeField] float AITimer;
 
     [Header("AI Constraints")]
-    [SerializeField] bool canBecomeSelfAware = false;
+    [SerializeField] bool canBecomeSelfAware = true;
     [SerializeField] Vector4 movementSampleConstraints = new Vector4(-15.0f, 15.0f, -15.0f, 15.0f);
 
     #endregion
@@ -62,6 +63,7 @@ public class AIController : NetworkBehaviour
     void Update()
     {
         AITimer = Mathf.Max(AITimer - Time.deltaTime, 0.0f);
+
 
         if (AITimer > 0) {
             switch (behaviour) 
@@ -273,12 +275,18 @@ public class AIController : NetworkBehaviour
     IEnumerator StepCountdown(){
         while(true){
             float stepTime = stepLength*0f;
-
-            stepTime = stepLength*.59f;
+            currentPos = this.transform.position;
+            if (Mathf.Abs((currentPos - lastPos).magnitude) > 1) {
+                stepTime = stepLength*.59f;
+            } else {
+                yield return null; 
+                continue;
+            }
 
             float totalTime = 0f;
             while (totalTime < stepTime){
                 totalTime += Time.deltaTime;
+                lastPos = currentPos;
                 yield return null;
             }
             SpawnSound();

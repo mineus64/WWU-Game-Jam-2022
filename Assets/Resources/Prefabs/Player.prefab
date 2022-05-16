@@ -130,8 +130,8 @@ MonoBehaviour:
   cameraAnchor: {fileID: 5966414240533276398}
   weaponAnchor: {fileID: 3847762614197723888}
   movement: {x: 0, y: 0, z: 0}
-  baseMoveSpeed: 5
-  moveSpeed: 5
+  baseMoveSpeed: 1.5
+  moveSpeed: 1.5
   footstepVolume: 15
   stepLength: 5
   weaponsInBag:
@@ -190,6 +190,10 @@ MonoBehaviour:
   isFiring: 0
   currentHealth: 100
   maxHealth: 100
+  reloadTimer: 0
+  reloading: 0
+  deathTimer: 0
+  dead: 0
 --- !u!114 &5620339083496614362
 MonoBehaviour:
   m_ObjectHideFlags: 0

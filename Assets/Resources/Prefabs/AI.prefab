@@ -140,7 +140,7 @@ MonoBehaviour:
   characterController: {fileID: 6458103525281268990}
   weaponAnchor: {fileID: 0}
   movement: {x: 0, y: 0, z: 0}
-  baseMoveSpeed: 5
+  baseMoveSpeed: 1.5
   moveSpeed: 0
   footstepVolume: 15
   stepLength: 5
@@ -158,6 +158,8 @@ MonoBehaviour:
   AITimer: 0
   canBecomeSelfAware: 0
   movementSampleConstraints: {x: -15, y: 15, z: -15, w: 15}
+  deathTimer: 0
+  dead: 0
 --- !u!114 &6214789244602525950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +187,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

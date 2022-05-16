@@ -366,6 +366,8 @@ public class PlayerController : NetworkBehaviour
         dead = true;
 
         deathTimer = 2.5f;
+
+        GameManager.current.playerDeaths += 1;
     }
 
     #endregion

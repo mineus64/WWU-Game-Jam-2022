@@ -372,6 +372,8 @@ public class AIController : NetworkBehaviour
         dead = true;
 
         deathTimer = 2.5f;
+
+        GameManager.current.playerKills += 1;
     }
 
     float DifficultyBehaviorMod(Difficulty difficulty) 

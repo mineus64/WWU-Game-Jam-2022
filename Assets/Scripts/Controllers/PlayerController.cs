@@ -1,6 +1,7 @@
 // This script should be attached to the player prefab. It handles player inputs and controls.
 
 using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,10 @@ public class PlayerController : NetworkBehaviour
     [Header("Health Values")]
     [SerializeField] float currentHealth;
     [SerializeField] float maxHealth;
+
+    [Header("Timers")]
+    [SerializeField] float reloadTimer = 0.0f;
+    [SerializeField] bool reloading = false;
 
     #endregion
 
@@ -94,10 +99,20 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer) {
             GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
         }
+
+        reloadTimer = Mathf.Max(reloadTimer - Time.deltaTime, 0.0f);
+
+        if (reloadTimer == 0 && reloading == true) {
+            ReloadFinish(currentWeapon);
+
+            reloadTimer = 0;
+
+            reloading = false;
+        }
     }
+
     void FixedUpdate() {
         if(isFiring && allowfire){
-            Debug.Log("Firing!");
             allowfire = false;
             StartCoroutine(fireWeapon());
         }
@@ -139,6 +154,7 @@ public class PlayerController : NetworkBehaviour
             SetWeapon(refinedInput);
         }
     }
+
     public void Fire(InputAction.CallbackContext context) 
     {
         if (context.started) {
@@ -152,11 +168,18 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void FireWeapon(InputAction.CallbackContext context){
+    public void FireWeapon(InputAction.CallbackContext context)
+    {
 
 
     }
 
+    public void Reload(InputAction.CallbackContext context) 
+    {
+        reloadTimer = weaponsInBag[currentWeapon].weapon.reloadTime;
+
+        reloading = true;
+    }
     #endregion
 
     #region Specific Methods
@@ -191,9 +214,18 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    IEnumerator FireCooldown(float rateOfFire){
+    IEnumerator FireCooldown(float rateOfFire) {
         new WaitForSeconds(1/rateOfFire);
         yield return null;
+    }
+
+    void ReloadFinish(int weapon) 
+    {
+        int magCount = weaponsInBag[weapon].magAmmo;
+
+        weaponsInBag[weapon].magAmmo = Mathf.Min(weaponsInBag[weapon].weapon.magSize, weaponsInBag[weapon].reserveAmmo);
+
+        weaponsInBag[weapon].reserveAmmo = Mathf.Max(weaponsInBag[weapon].magAmmo - magCount, 0);
     }
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
@@ -251,20 +283,25 @@ public class PlayerController : NetworkBehaviour
         fireRate = GameManager.current.weapons[currentWeapon].fireRate;
         float originalFireRate = fireRate;
         while(fireRate > 0 && isFiring == true){
-            fireRate -= 1;
-            GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
-            bullet.GetComponent<Transform>().SetParent(this.transform);
-            bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
-            bullet.GetComponent<Transform>().SetParent(null, true);
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
+            if (weaponsInBag[currentWeapon].magAmmo > 0) {
+                fireRate -= 1;
+                GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
+                bullet.GetComponent<Transform>().SetParent(this.transform);
+                bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
+                bullet.GetComponent<Transform>().SetParent(null, true);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
 
-            SpawnSound(GameManager.current.weapons[currentWeapon].weaponNoise);
+                SpawnSound(GameManager.current.weapons[currentWeapon].weaponNoise);
+
+                weaponsInBag[currentWeapon].magAmmo -= 1;
+            }
 
             yield return new WaitForSeconds(1/originalFireRate);
         }
         allowfire = true;
         yield return null;
     }
+
     public void AddWeapon(int weapon, int ammo = 0) 
     {
         WeaponSlot weaponSlot = weaponsInBag[weapon];

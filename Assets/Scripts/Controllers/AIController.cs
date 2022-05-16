@@ -355,7 +355,7 @@ public class AIController : NetworkBehaviour
 
     public void Die() 
     {
-
+        
     }
 
     float DifficultyBehaviorMod(Difficulty difficulty) 

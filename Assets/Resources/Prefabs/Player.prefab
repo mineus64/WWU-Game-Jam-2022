@@ -125,7 +125,6 @@ MonoBehaviour:
   syncInterval: 0.1
   allowfire: 0
   fireRate: 0
-  stepLength: 2.5
   characterController: {fileID: 1356177442651576243}
   playerInput: {fileID: 5425851074043204698}
   cameraAnchor: {fileID: 5966414240533276398}
@@ -313,6 +312,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 849d33c0-8018-4442-ad5a-bb4fb1de5633
     m_ActionName: Controls/Weapon Fire[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2298202664374931542}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Reload
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 62626da5-1edd-4cee-b7f6-a199cd217247
+    m_ActionName: Controls/Reload[/Keyboard/r]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard and Mouse
   m_DefaultActionMap: Controls

@@ -291,16 +291,20 @@ public class PlayerController : NetworkBehaviour
         fireRate = GameManager.current.weapons[currentWeapon].fireRate;
         float originalFireRate = fireRate;
         while(fireRate > 0 && isFiring == true){
-            fireRate -= 1;
-            GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity, this.transform);
-            if(this.gameObject.CompareTag("Player")){
-                bullet.GetComponent<BulletObject>().IsPlayerBullet = true;
-            } else{
-                bullet.GetComponent<BulletObject>().IsPlayerBullet = false;
+            if (weaponsInBag[currentWeapon].magAmmo > 0) {
+                fireRate -= 1;
+                GameObject bullet = Instantiate(GameManager.current.weapons[currentWeapon].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity, this.transform);
+                if(this.gameObject.CompareTag("Player")){
+                    bullet.GetComponent<BulletObject>().IsPlayerBullet = true;
+                } else{
+                    bullet.GetComponent<BulletObject>().IsPlayerBullet = false;
+                }
+                bullet.GetComponent<BulletObject>().Damage = GameManager.current.weapons[currentWeapon].damage;
+                bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
+                bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
+
+                weaponsInBag[currentWeapon].magAmmo -= 1;
             }
-            bullet.GetComponent<BulletObject>().Damage = GameManager.current.weapons[currentWeapon].damage;
-            bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[currentWeapon].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
             yield return new WaitForSeconds(1/originalFireRate);
         }
         allowfire = true;

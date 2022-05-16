@@ -14,7 +14,7 @@ public class AIController : NetworkBehaviour
     public Vector3 lastPos;
     public bool allowfire;
 
-    public float FiringTime;
+    public float FiringTime = 3f;
 
     public float fireRate;
 

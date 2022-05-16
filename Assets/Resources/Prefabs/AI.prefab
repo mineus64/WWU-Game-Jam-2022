@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5819109552252843727}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7084160205124450310
 GameObject:
@@ -66,6 +66,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1691996441818525338}
   - {fileID: 5087511825524833469}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -168,7 +169,8 @@ MonoBehaviour:
   syncInterval: 0.1
   currentPos: {x: 0, y: 0, z: 0}
   lastPos: {x: 0, y: 0, z: 0}
-  allowfire: 0
+  allowfire: 1
+  FiringTime: 3
   fireRate: 0
   characterController: {fileID: 6458103525281268990}
   weaponAnchor: {fileID: 210059286128913311}
@@ -177,8 +179,13 @@ MonoBehaviour:
   moveSpeed: 0
   footstepVolume: 15
   stepLength: 5
-  weaponsInBag: []
-  currentWeapon: 0
+  weaponsInBag:
+  - name: Assault Rifle
+    isInBag: 1
+    magAmmo: 30
+    reserveAmmo: 200
+    weapon: {fileID: 11400000, guid: 4bde72a183781b64892004fb306d59cd, type: 2}
+  currentWeapon: 2
   currentWeaponObj: {fileID: 0}
   isFiring: 0
   currentHealth: 100

@@ -149,6 +149,8 @@ public class GameManager : MonoBehaviour
     public void Respawn(GameObject entity) 
     {
         entity.transform.position = spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform.position;
+
+        entity.GetComponent<MeshRenderer>().enabled = true;
     }
 
     void StartGame() 

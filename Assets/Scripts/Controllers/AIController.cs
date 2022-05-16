@@ -422,6 +422,8 @@ public class AIController : NetworkBehaviour
 
         deathTimer = 2.5f;
 
+        this.GetComponent<MeshRenderer>().enabled = false;
+
         GameManager.current.playerKills += 1;
     }
 

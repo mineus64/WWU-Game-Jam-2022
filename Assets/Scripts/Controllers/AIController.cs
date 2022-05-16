@@ -12,6 +12,10 @@ public class AIController : NetworkBehaviour
     #region Variables
     public Vector3 currentPos;
     public Vector3 lastPos;
+    public bool allowfire;
+
+    public float fireRate;
+
     [Header("Object Components")]
     [SerializeField] CharacterController characterController;
     [SerializeField] GameObject weaponAnchor;
@@ -57,6 +61,7 @@ public class AIController : NetworkBehaviour
     {
         playerTarget = GameManager.current.currentClient;
         StartCoroutine(StepCountdown());
+        currentWeaponObj = Instantiate(GameManager.current.weapons[2].weaponObject, weaponAnchor.transform);
     }
 
     // Update is called once per frame
@@ -213,7 +218,13 @@ public class AIController : NetworkBehaviour
         if (currentHealth <= 20.0f) {
             behaviour = AIBehaviour.Retreating;
         }
-
+        transform.LookAt(playerTarget.transform);
+        float random = Random.Range(0, 1);
+        if( (random < 0.8f) && allowfire){
+            Debug.Log("Firing!");
+            allowfire = false;
+            StartCoroutine(fireWeapon());
+        }
         RaycastHit hit = new RaycastHit();
 
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
@@ -311,6 +322,27 @@ public class AIController : NetworkBehaviour
             SpawnSound();
             yield return null;
         }
+    }
+    IEnumerator fireWeapon(){
+        fireRate = GameManager.current.weapons[2].fireRate;
+        float originalFireRate = fireRate;
+        while(fireRate > 0 && isFiring == true){
+            fireRate -= 1;
+            GameObject bullet = Instantiate(GameManager.current.weapons[2].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
+            if(this.gameObject.CompareTag("Player")){
+                bullet.GetComponent<BulletObject>().IsPlayerBullet = true;
+            } else{
+                bullet.GetComponent<BulletObject>().IsPlayerBullet = false;
+            }
+            bullet.GetComponent<BulletObject>().Damage = GameManager.current.weapons[2].damage;
+            bullet.GetComponent<Transform>().SetParent(this.transform);
+            bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
+            bullet.GetComponent<Transform>().SetParent(null, true);
+            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[2].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
+            yield return new WaitForSeconds(1/originalFireRate);
+        }
+        allowfire = true;
+        yield return null;
     }
 
     void SpawnSound() 

@@ -347,16 +347,14 @@ public class AIController : NetworkBehaviour
         float originalFireRate = fireRate;
         while(fireRate > 0 && isFiring == true){
             fireRate -= 1;
-            GameObject bullet = Instantiate(GameManager.current.weapons[2].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(GameManager.current.weapons[2].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity, this.transform);
             if(this.gameObject.CompareTag("Player")){
                 bullet.GetComponent<BulletObject>().IsPlayerBullet = true;
             } else{
                 bullet.GetComponent<BulletObject>().IsPlayerBullet = false;
             }
             bullet.GetComponent<BulletObject>().Damage = GameManager.current.weapons[2].damage;
-            bullet.GetComponent<Transform>().SetParent(this.transform);
             bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
-            bullet.GetComponent<Transform>().SetParent(null, true);
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[2].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
             yield return new WaitForSeconds(1/originalFireRate);
         }

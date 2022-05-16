@@ -14,6 +14,8 @@ public class AIController : NetworkBehaviour
     public Vector3 lastPos;
     public bool allowfire;
 
+    public float FiringTime;
+
     public float fireRate;
 
     [Header("Object Components")]
@@ -67,6 +69,8 @@ public class AIController : NetworkBehaviour
         playerTarget = GameManager.current.currentClient;
         StartCoroutine(StepCountdown());
         currentWeaponObj = Instantiate(GameManager.current.weapons[2].weaponObject, weaponAnchor.transform);
+        allowfire = true;
+        isFiring = false;
     }
 
     // Update is called once per frame
@@ -235,7 +239,12 @@ public class AIController : NetworkBehaviour
         }
         transform.LookAt(playerTarget.transform);
         float random = Random.Range(0.0f, 1.0f);
-        if( (random < 0.8f) && allowfire){
+        Debug.Log(random);
+        if ((random <= 0.8f) && isFiring == false){
+            StartCoroutine(FiringTimer());
+        }
+        if( isFiring && allowfire){
+            
             Debug.Log("Firing!");
             allowfire = false;
             StartCoroutine(fireWeapon());
@@ -348,11 +357,6 @@ public class AIController : NetworkBehaviour
         while(fireRate > 0 && isFiring == true){
             fireRate -= 1;
             GameObject bullet = Instantiate(GameManager.current.weapons[2].weaponProjectile, weaponAnchor.transform.position, Quaternion.identity, this.transform);
-            if(this.gameObject.CompareTag("Player")){
-                bullet.GetComponent<BulletObject>().IsPlayerBullet = true;
-            } else{
-                bullet.GetComponent<BulletObject>().IsPlayerBullet = false;
-            }
             bullet.GetComponent<BulletObject>().Damage = GameManager.current.weapons[2].damage;
             bullet.transform.rotation = Quaternion.Euler(90,0,this.transform.rotation.y);
             bullet.GetComponent<Rigidbody>().AddForce(transform.forward * GameManager.current.weapons[2].weaponProjectile.GetComponent<BulletObject>().FiringSpeed * 300);
@@ -360,6 +364,21 @@ public class AIController : NetworkBehaviour
         }
         allowfire = true;
         yield return null;
+    }
+
+    IEnumerator FiringTimer(){
+
+        isFiring = true;
+        float totalTime = 0f;
+        while (totalTime < FiringTime){
+
+            totalTime += Time.deltaTime;
+            yield return null;
+
+        }
+        
+        isFiring = false;
+
     }
 
     void SpawnSound() 

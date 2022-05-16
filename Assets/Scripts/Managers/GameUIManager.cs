@@ -30,6 +30,9 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] TMP_Text pickupText;
     [SerializeField] float pickupTextTimer;
 
+    [Header("Time Text")]
+    [SerializeField] TMP_Text timeText;
+
     #endregion
 
     #region General Methods
@@ -53,6 +56,11 @@ public class GameUIManager : MonoBehaviour
         if (pickupTextTimer <= 0 && pickupText.gameObject.activeSelf) {
             pickupText.gameObject.SetActive(false);
         }
+
+        int minutes = Mathf.FloorToInt(GameManager.current.gameTimer / 60);
+        int seconds = Mathf.FloorToInt(GameManager.current.gameTimer % 60);
+
+        timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     #endregion

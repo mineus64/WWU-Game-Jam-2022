@@ -36,6 +36,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] int numAI;
     [SerializeField] Difficulty aiDifficulty;
 
+    [Header("Objective")]
+    public float gameTimer = 300.0f;
+    [SerializeField] bool gameStarted = false;
+    public GameState gameState = GameState.Starting;
+    public int playerKills = 0;
+    public int playerDeaths = 0;
+    [SerializeField] float gameEndTimer = 5.0f;
+    [SerializeField] bool gameEnding = false;
+
     #endregion
 
     #region General Methods
@@ -56,7 +65,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameStarted) {
+            gameTimer = Mathf.Max(gameTimer - Time.deltaTime, 0.0f);
+
+            if (gameTimer <= 0.0f) {
+                gameState = GameState.Ended;
+
+                gameEnding = true;
+            }
+        }
+
+        if (gameEnding) {
+            gameEndTimer = Mathf.Max(gameEndTimer - Time.deltaTime, 0.0f);
+
+            if (gameEndTimer <= 0.0f) {
+                ToMenu(true);
+            }
+        }
     }
 
     #endregion
@@ -117,6 +142,8 @@ public class GameManager : MonoBehaviour
 
             availableSpawns.Remove(availableSpawns[spawnIndex]);
         }
+
+        StartGame();
     }
 
     public void Respawn(GameObject entity) 
@@ -124,6 +151,23 @@ public class GameManager : MonoBehaviour
         entity.transform.position = spawnPoints[Random.Range(0, spawnPoints.Count - 1)].transform.position;
     }
 
+    void StartGame() 
+    {
+        gameTimer = 300.0f;
+        gameStarted = true;
+        gameState = GameState.Running;
+        playerKills = 0;
+        playerDeaths = 0;
+        gameEndTimer = 5.0f;
+        gameEnding = false;
+    }
+
     #endregion
 }
- 
+
+public enum GameState 
+{
+    Starting,
+    Running,
+    Ended
+}

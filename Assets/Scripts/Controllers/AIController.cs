@@ -145,7 +145,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform == playerTarget.gameObject) {
+            if (hit.transform == playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -189,7 +189,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform == playerTarget.gameObject) {
+            if (hit.transform == playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -234,7 +234,7 @@ public class AIController : NetworkBehaviour
             behaviour = AIBehaviour.Retreating;
         }
         transform.LookAt(playerTarget.transform);
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
         if( (random < 0.8f) && allowfire){
             Debug.Log("Firing!");
             allowfire = false;
@@ -245,7 +245,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform != playerTarget.gameObject) {
+            if (hit.transform != playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Searching;
 
                 AITimer = 2.5f;
@@ -402,6 +402,8 @@ public class AIController : NetworkBehaviour
         dead = true;
 
         deathTimer = 2.5f;
+
+        GameManager.current.playerKills += 1;
     }
 
     float DifficultyBehaviorMod(Difficulty difficulty) 

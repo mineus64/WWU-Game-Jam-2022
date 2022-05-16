@@ -145,7 +145,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform == playerTarget.gameObject) {
+            if (hit.transform == playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -189,7 +189,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform == playerTarget.gameObject) {
+            if (hit.transform == playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -245,7 +245,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform != playerTarget.gameObject) {
+            if (hit.transform != playerTarget.gameObject.transform) {
                 behaviour = AIBehaviour.Searching;
 
                 AITimer = 2.5f;

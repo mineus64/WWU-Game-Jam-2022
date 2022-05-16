@@ -71,3 +71,27 @@
 1652624763|Added ammo, assigned to weapons, began work on fire method
 1652625508|**BUGGED** Added fire control
 1652625740|Added Health Handling
+1652644496|Added Player Weapon Pickups
+1652645174|Fixed Weapon Pickup Ammo Count
+1652645826|Added Pickup Text
+1652646268|Working more on the firing method
+1652646649|Added NavMesh
+1652647871|Added Rudimentary AI
+1652651392|Fixed Player Spawning
+1652652222|Added AI Behaviour
+1652652716|Added Step Sounds to AI
+1652653168|The AI Can Now Die
+1652654110|Bullets work!!
+1652655672|Added Player and AI Spawning
+1652655769|Fix
+1652655795|Fix
+1652655910|Rebaked Navmesh
+1652656251|AI No Longer Aggressively Snuggles
+1652656357|Fixed AIMovement sound generation bug
+1652656596|Slightly Fixed AI Issues
+1652657531|Fixed AI Issues
+1652657860|Added AI Difficulty Selection
+1652658202|Added Sound Spawning When Shooting
+1652658245|Fixed Weapon Spawners Hovering
+1652658368|The AI Are Now Armed
+1652660252|Added Reloading

@@ -49,6 +49,10 @@ public class AIController : NetworkBehaviour
     [SerializeField] bool canBecomeSelfAware = true;
     [SerializeField] Vector4 movementSampleConstraints = new Vector4(-15.0f, 15.0f, -15.0f, 15.0f);
 
+    [Header("Timers")]
+    [SerializeField] float deathTimer = 0.0f;
+    [SerializeField] bool dead = false;
+
     #endregion
 
     #region General Methods
@@ -99,6 +103,14 @@ public class AIController : NetworkBehaviour
                     RetreatExit();
                     break;
             }
+        }
+
+        deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
+
+        if (deathTimer == 0 && dead == true) {
+            GameManager.current.Respawn(this.gameObject);
+
+            behaviour = AIBehaviour.Patrolling;
         }
     }
 
@@ -355,7 +367,11 @@ public class AIController : NetworkBehaviour
 
     public void Die() 
     {
-        
+        behaviour = AIBehaviour.Dead;
+
+        dead = true;
+
+        deathTimer = 2.5f;
     }
 
     float DifficultyBehaviorMod(Difficulty difficulty) 

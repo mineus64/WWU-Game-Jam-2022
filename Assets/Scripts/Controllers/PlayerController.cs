@@ -44,6 +44,8 @@ public class PlayerController : NetworkBehaviour
     [Header("Timers")]
     [SerializeField] float reloadTimer = 0.0f;
     [SerializeField] bool reloading = false;
+    [SerializeField] float deathTimer = 0.0f;
+    [SerializeField] bool dead = false;
 
     #endregion
 
@@ -108,6 +110,12 @@ public class PlayerController : NetworkBehaviour
             reloadTimer = 0;
 
             reloading = false;
+        }
+
+        deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
+
+        if (deathTimer == 0 && dead == true) {
+            GameManager.current.Respawn(this.gameObject);
         }
     }
 
@@ -355,7 +363,9 @@ public class PlayerController : NetworkBehaviour
 
     public void Die() 
     {
+        dead = true;
 
+        deathTimer = 2.5f;
     }
 
     #endregion

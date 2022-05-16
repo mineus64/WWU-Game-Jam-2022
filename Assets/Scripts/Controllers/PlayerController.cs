@@ -1,6 +1,7 @@
 // This script should be attached to the player prefab. It handles player inputs and controls.
 
 using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,12 @@ public class PlayerController : NetworkBehaviour
     [Header("Health Values")]
     [SerializeField] float currentHealth;
     [SerializeField] float maxHealth;
+
+    [Header("Timers")]
+    [SerializeField] float reloadTimer = 0.0f;
+    [SerializeField] bool reloading = false;
+    [SerializeField] float deathTimer = 0.0f;
+    [SerializeField] bool dead = false;
 
     #endregion
 
@@ -94,10 +101,26 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer) {
             GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
         }
+
+        reloadTimer = Mathf.Max(reloadTimer - Time.deltaTime, 0.0f);
+
+        if (reloadTimer == 0 && reloading == true) {
+            ReloadFinish(currentWeapon);
+
+            reloadTimer = 0;
+
+            reloading = false;
+        }
+
+        deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
+
+        if (deathTimer == 0 && dead == true) {
+            GameManager.current.Respawn(this.gameObject);
+        }
     }
+
     void FixedUpdate() {
         if(isFiring && allowfire){
-            Debug.Log("Firing!");
             allowfire = false;
             StartCoroutine(fireWeapon());
         }
@@ -139,6 +162,7 @@ public class PlayerController : NetworkBehaviour
             SetWeapon(refinedInput);
         }
     }
+
     public void Fire(InputAction.CallbackContext context) 
     {
         if (context.started) {
@@ -152,20 +176,27 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void FireWeapon(InputAction.CallbackContext context){
+    public void FireWeapon(InputAction.CallbackContext context)
+    {
 
 
     }
 
+    public void Reload(InputAction.CallbackContext context) 
+    {
+        reloadTimer = weaponsInBag[currentWeapon].weapon.reloadTime;
+
+        reloading = true;
+    }
     #endregion
 
     #region Specific Methods
 
-    void SpawnSound() 
+    void SpawnSound(float volume) 
     {
         Sound currentSound = Instantiate(GameManager.current.sound, this.transform.position, Quaternion.identity).GetComponent<Sound>();
 
-        currentSound.SetProperties(footstepVolume);
+        currentSound.SetProperties(volume);
     }
 
     IEnumerator StepCountdown(){
@@ -186,14 +217,23 @@ public class PlayerController : NetworkBehaviour
                 totalTime += Time.deltaTime;
                 yield return null;
             }
-            SpawnSound();
+            SpawnSound(footstepVolume);
             yield return null;
         }
     }
 
-    IEnumerator FireCooldown(float rateOfFire){
+    IEnumerator FireCooldown(float rateOfFire) {
         new WaitForSeconds(1/rateOfFire);
         yield return null;
+    }
+
+    void ReloadFinish(int weapon) 
+    {
+        int magCount = weaponsInBag[weapon].magAmmo;
+
+        weaponsInBag[weapon].magAmmo = Mathf.Min(weaponsInBag[weapon].weapon.magSize, weaponsInBag[weapon].reserveAmmo);
+
+        weaponsInBag[weapon].reserveAmmo = Mathf.Max(weaponsInBag[weapon].magAmmo - magCount, 0);
     }
 
     void SetWeapon(int weaponSwitch = 0, int weaponSet = 0) 
@@ -266,6 +306,7 @@ public class PlayerController : NetworkBehaviour
         allowfire = true;
         yield return null;
     }
+
     public void AddWeapon(int weapon, int ammo = 0) 
     {
         WeaponSlot weaponSlot = weaponsInBag[weapon];
@@ -319,7 +360,9 @@ public class PlayerController : NetworkBehaviour
 
     public void Die() 
     {
+        dead = true;
 
+        deathTimer = 2.5f;
     }
 
     #endregion

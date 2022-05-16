@@ -98,7 +98,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  expansionRate: 2.5
+  expansionRate: 3.5
   fadeRate: 5
   volume: 0
   sphere: {fileID: 6164822150987303646}

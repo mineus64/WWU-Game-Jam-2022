@@ -41,6 +41,7 @@ public class AIController : NetworkBehaviour
 
     [Header("AI")]
     [SerializeField] NavMeshAgent navMeshAgent;
+    [SerializeField] public Difficulty aiDifficulty;
 
     [Header("AI Behaviour Values")]
     [SerializeField] AIBehaviour behaviour = AIBehaviour.Patrolling;
@@ -51,6 +52,10 @@ public class AIController : NetworkBehaviour
     [Header("AI Constraints")]
     [SerializeField] bool canBecomeSelfAware = true;
     [SerializeField] Vector4 movementSampleConstraints = new Vector4(-15.0f, 15.0f, -15.0f, 15.0f);
+
+    [Header("Timers")]
+    [SerializeField] float deathTimer = 0.0f;
+    [SerializeField] bool dead = false;
 
     #endregion
 
@@ -104,6 +109,14 @@ public class AIController : NetworkBehaviour
                     break;
             }
         }
+
+        deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
+
+        if (deathTimer == 0 && dead == true) {
+            GameManager.current.Respawn(this.gameObject);
+
+            behaviour = AIBehaviour.Patrolling;
+        }
     }
 
     #endregion
@@ -132,7 +145,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform.GetComponent<PlayerController>() != null) {
+            if (hit.transform == playerTarget.gameObject) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -140,19 +153,19 @@ public class AIController : NetworkBehaviour
 
     void PatrolExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }
@@ -176,7 +189,7 @@ public class AIController : NetworkBehaviour
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            if (hit.transform.GetComponent<PlayerController>() != null) {
+            if (hit.transform == playerTarget.gameObject) {
                 behaviour = AIBehaviour.Attacking;
             }
         }
@@ -184,19 +197,19 @@ public class AIController : NetworkBehaviour
 
     void SearchExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }
@@ -215,6 +228,8 @@ public class AIController : NetworkBehaviour
 
     void AttackBehaviour() 
     {
+        transform.LookAt(playerTarget.transform);
+
         if (currentHealth <= 20.0f) {
             behaviour = AIBehaviour.Retreating;
         }
@@ -229,8 +244,12 @@ public class AIController : NetworkBehaviour
 
         Vector3 rayDirection = playerTarget.transform.position - this.transform.position;
 
-        if (!Physics.Raycast(this.transform.position, rayDirection, out hit)) {
-            behaviour = AIBehaviour.Searching;
+        if (Physics.Raycast(this.transform.position, rayDirection, out hit)) {
+            if (hit.transform != playerTarget.gameObject) {
+                behaviour = AIBehaviour.Searching;
+
+                AITimer = 2.5f;
+            }
         }
 
         if (Vector3.Distance(playerTarget.transform.position, this.transform.position) > 10.0f) {
@@ -284,19 +303,19 @@ public class AIController : NetworkBehaviour
 
     void RetreatExit() 
     {
-        float random = Random.Range(0, 1);
+        float random = Random.Range(0.0f, 1.0f);
 
-        if (random >= 0.5) {
+        if (random >= DifficultyBehaviorMod(aiDifficulty)) {
             behaviour = AIBehaviour.Patrolling;
 
-            AITimer = 10.0f;
+            AITimer = 5.0f;
 
             PatrolEnter();
         }
         else {
             behaviour = AIBehaviour.Searching;
 
-            AITimer = 5.0f;
+            AITimer = 2.5f;
 
             SearchEnter();
         }
@@ -380,7 +399,28 @@ public class AIController : NetworkBehaviour
 
     public void Die() 
     {
+        behaviour = AIBehaviour.Dead;
 
+        dead = true;
+
+        deathTimer = 2.5f;
+    }
+
+    float DifficultyBehaviorMod(Difficulty difficulty) 
+    {
+        switch (difficulty) 
+        {
+            case Difficulty.Easy:
+                return 0.10f;
+            case Difficulty.Normal:
+                return 0.25f;
+            case Difficulty.Hard:
+                return 0.50f;
+            case Difficulty.Insane:
+                return 0.75f;
+            default:
+                return 0.25f;
+        }
     }
 
     #endregion

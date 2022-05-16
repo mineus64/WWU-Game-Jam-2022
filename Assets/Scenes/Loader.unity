@@ -482,9 +482,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a67f209ca074304fba73ff40ed24299, type: 2}
   - {fileID: 11400000, guid: 9263703f1b0b9f24486d8893ad2996ca, type: 2}
   - {fileID: 11400000, guid: 4bde72a183781b64892004fb306d59cd, type: 2}
-  - {fileID: 11400000, guid: 4c92316f1369b694a9d1016739e7ecb9, type: 2}
-  - {fileID: 11400000, guid: bf3e1153380a98640939a35cc4cbd82e, type: 2}
-  - {fileID: 11400000, guid: 82c956fa617543b46b8af612fb8a486a, type: 2}
   - {fileID: 11400000, guid: d4ba1aa7971a77449974f0b23c078acb, type: 2}
   - {fileID: 11400000, guid: d1e9cbc9a012c4c41b1a3576020f51eb, type: 2}
   - {fileID: 11400000, guid: 09c4290aa9b6f6042a5d524afdbfe68e, type: 2}
@@ -500,6 +497,14 @@ MonoBehaviour:
   - {fileID: 778561884}
   - {fileID: 1108586164}
   numAI: 0
+  aiDifficulty: 0
+  gameTimer: 300
+  gameStarted: 0
+  gameState: 0
+  playerKills: 0
+  playerDeaths: 0
+  gameEndTimer: 5
+  gameEnding: 0
 --- !u!1 &1995184201
 GameObject:
   m_ObjectHideFlags: 0

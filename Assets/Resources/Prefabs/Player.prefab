@@ -150,21 +150,6 @@ MonoBehaviour:
     magAmmo: 30
     reserveAmmo: 60
     weapon: {fileID: 11400000, guid: 4bde72a183781b64892004fb306d59cd, type: 2}
-  - name: Big Bang Grenade
-    isInBag: 0
-    magAmmo: 0
-    reserveAmmo: 0
-    weapon: {fileID: 11400000, guid: 4c92316f1369b694a9d1016739e7ecb9, type: 2}
-  - name: Decoy Grenade
-    isInBag: 0
-    magAmmo: 0
-    reserveAmmo: 0
-    weapon: {fileID: 11400000, guid: bf3e1153380a98640939a35cc4cbd82e, type: 2}
-  - name: Frag Grenade
-    isInBag: 0
-    magAmmo: 0
-    reserveAmmo: 0
-    weapon: {fileID: 11400000, guid: 82c956fa617543b46b8af612fb8a486a, type: 2}
   - name: Pistol (Suppressed)
     isInBag: 0
     magAmmo: 0

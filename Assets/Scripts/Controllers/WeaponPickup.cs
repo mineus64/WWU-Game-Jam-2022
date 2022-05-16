@@ -16,9 +16,6 @@ public class WeaponPickup : MonoBehaviour
         16,     // Pistol
         5,      // Anti-Material Rifle
         30,     // Assault Rifle
-        1,      // Big Bang Grenade
-        1,      // Decoy Grenade
-        1,      // Frag Grenade
         8,      // Pistol (Suppressed)
         1,      // Rocket Launcher
         6,      // Shotgun

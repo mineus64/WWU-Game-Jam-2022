@@ -89,9 +89,24 @@
 1652656251|AI No Longer Aggressively Snuggles
 1652656357|Fixed AIMovement sound generation bug
 1652656596|Slightly Fixed AI Issues
+1652657299|Damage baybee
 1652657531|Fixed AI Issues
 1652657860|Added AI Difficulty Selection
 1652658202|Added Sound Spawning When Shooting
 1652658245|Fixed Weapon Spawners Hovering
 1652658368|The AI Are Now Armed
 1652660252|Added Reloading
+1652660673|Implemented Death
+1652661097|Lowered Move Speed
+1652661879|Fixed boolet
+1652662185|Added Gamestate Tracking
+1652662265|Update AIController.cs
+1652663081|Fixed AI Bugs
+1652663307|Added sound!! You can hear now!!! Its a miracle!!! The doctors said you wouldn't be able to!!!!
+1652663408|Gun Ammo Depletes Again
+1652664373|AI now hides when dead
+1652665147|Debugging AI Firing
+1652665462|AI SHOOT EWOOOWOOWJIOAHNWIUDNBAIBNW
+1652665742|Adjusted Menu Scenes
+1652666190|Added Credit Where It's Due
+1652666297|Some more fixes - Removeed greadnanalskijndlko

@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
 
     #region Variables
 
-
+    object test;
 
     #endregion
 

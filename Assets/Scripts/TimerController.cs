@@ -31,7 +31,7 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -59,30 +59,30 @@ public class TimerController : MonoBehaviour
 
     #region Specific Methods
 
-    public Action Add(float time, bool type = true) 
+    public Action Add(Action returnMethod, float time, bool type = true, bool reuse = false) 
     {
         Action output;
 
         if (type == true) {
-            output = AddUpdate(time);
+            output = AddUpdate(returnMethod, time, reuse);
         }
         else {
-            output = AddFixedUpdate(time);
+            output = AddFixedUpdate(returnMethod, time, reuse);
         }
 
         return output;
     }
 
-    public Action AddUpdate(float time)
+    public Action AddUpdate(Action returnMethod, float time, bool reuse = false)
     {
-        Timer newTimer = new Timer(updateTimers.Count, time);
+        Timer newTimer = new Timer(returnMethod, updateTimers.Count, time, reuse);
         updateTimers.Add(newTimer);
         return newTimer.callbackAction;
     }
 
-    public Action AddFixedUpdate(float time)
+    public Action AddFixedUpdate(Action returnMethod, float time, bool reuse = false)
     {
-        Timer newTimer = new Timer(fixedUpdateTimers.Count, time);
+        Timer newTimer = new Timer(returnMethod, fixedUpdateTimers.Count, time, reuse);
         fixedUpdateTimers.Add(newTimer);
         return newTimer.callbackAction;
     }
@@ -131,18 +131,23 @@ public class TimerController : MonoBehaviour
         fixedUpdateTimers[id].Restart();
     }
 
+    public void TimerFinishedGeneric() 
+    {
+        Debug.Log("TimerFinishedGeneric()");
+    }
+
     #endregion
 }
 
 // The Timer is a data object that holds values for a single timer
-public class Timer : MonoBehaviour
+public class Timer
 {
     #region Variables
 
     public int id {get; private set;}
     public float startTime {get; private set;}
     public float time {get; private set;}
-    public Action callbackAction {get; private set;}
+    public Action callbackAction;
     public bool reuse {get; private set;}
 
     #endregion
@@ -177,11 +182,12 @@ public class Timer : MonoBehaviour
 
     #region Constructors
 
-    public Timer(int id, float startTime, bool reuse = false) 
+    public Timer(Action returnMethod, int id, float startTime, bool reuse = false) 
     {
         this.id = id;
         this.startTime = startTime;
         this.time = startTime;
+        this.callbackAction = new Action(returnMethod); // This is gross
         this.reuse = reuse;
     }
 

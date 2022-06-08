@@ -43,3 +43,24 @@ public class TimerController : MonoBehaviour
 
     #endregion
 }
+
+public class Timer
+{
+    #region Variables
+
+
+
+    #endregion
+
+    #region General Methods
+
+
+
+    #endregion
+
+    #region Specific Methods
+
+
+
+    #endregion
+}

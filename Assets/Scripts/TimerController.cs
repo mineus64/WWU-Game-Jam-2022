@@ -16,8 +16,7 @@ public class TimerController : MonoBehaviour
 
     #region Variables
 
-    List<Timer> updateTimers = new List<Timer>();
-    List<Timer> fixedUpdateTimers = new List<Timer>();
+    List<IEnumerator> timers = new List<IEnumerator>();
 
     #endregion
 
@@ -31,164 +30,51 @@ public class TimerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (Timer timer in updateTimers)
-        {
-            if (timer.time > 0) {
-                timer.Tick(Time.deltaTime);
-            }
-        }
+        
     }
 
     void FixedUpdate() 
     {
-        foreach (Timer timer in fixedUpdateTimers)
-        {
-            if (timer.time > 0) {
-                timer.Tick(Time.fixedDeltaTime);
-            }
-        }
+        
     }
 
     #endregion
 
     #region Specific Methods
 
-    public Action Add(Action returnMethod, float time, bool type = true, bool reuse = false) 
+    public int Create(float time, Action returnMethod = null)
     {
-        Action output;
+        IEnumerator timer = Timer(time, returnMethod);
 
-        if (type == true) {
-            output = AddUpdate(returnMethod, time, reuse);
-        }
-        else {
-            output = AddFixedUpdate(returnMethod, time, reuse);
-        }
+        StartCoroutine(timer);
 
-        return output;
+        timers.Add(timer);
+
+        return (timers.Count - 1);
     }
 
-    public Action AddUpdate(Action returnMethod, float time, bool reuse = false)
+    public void Remove(int id) 
     {
-        Timer newTimer = new Timer(returnMethod, updateTimers.Count, time, reuse);
-        updateTimers.Add(newTimer);
-        return newTimer.callbackAction;
-    }
-
-    public Action AddFixedUpdate(Action returnMethod, float time, bool reuse = false)
-    {
-        Timer newTimer = new Timer(returnMethod, fixedUpdateTimers.Count, time, reuse);
-        fixedUpdateTimers.Add(newTimer);
-        return newTimer.callbackAction;
-    }
-
-    // Might create a memory leak, look into this more if we get memory problems
-    // I'm not sure if GC will properly destroy this class instance
-    public void Remove(int id, bool type = true)
-    {
-        if (type == true) {
-            RemoveUpdate(id);
-        }
-        else {
-            RemoveFixedUpdate(id);
-        }
-    }
-
-    public void RemoveUpdate(int id)
-    {
-        Timer removeTimer = updateTimers[id];
-        updateTimers.Remove(removeTimer);
-    }
-
-    public void RemoveFixedUpdate(int id)
-    {
-        Timer removeTimer = fixedUpdateTimers[id];
-        fixedUpdateTimers.Remove(removeTimer);
-    }
-
-    public void Restart(int id, bool type = true) 
-    {
-        if (type == true) {
-            RestartUpdate(id);
-        }
-        else {
-            RestartFixedUpdate(id);
-        }
-    }
-
-    public void RestartUpdate(int id) 
-    {
-        updateTimers[id].Restart();
-    }
-
-    public void RestartFixedUpdate(int id) 
-    {
-        fixedUpdateTimers[id].Restart();
-    }
-
-    public void TimerFinishedGeneric() 
-    {
-        Debug.Log("TimerFinishedGeneric()");
-    }
-
-    #endregion
-}
-
-// The Timer is a data object that holds values for a single timer
-public class Timer
-{
-    #region Variables
-
-    public int id {get; private set;}
-    public float startTime {get; private set;}
-    public float time {get; private set;}
-    public Action callbackAction;
-    public bool reuse {get; private set;}
-
-    #endregion
-
-    #region General Methods
-
-
-
-    #endregion
-
-    #region Specific Methods
-
-    public void Tick(float tickAmount) 
-    {
-        time = Mathf.Max(time - tickAmount, 0);
-
-        if (time <= 0) {
-            callbackAction?.Invoke();
-
-            if (reuse == false) {
-                TimerController.current.Remove(id);
-            }
-        }
-    }
-
-    public void Restart() 
-    {
-        time = startTime;
+        StopCoroutine(timers[id]);
     }
 
     #endregion
 
-    #region Constructors
+    #region Coroutines
 
-    public Timer(Action returnMethod, int id, float startTime, bool reuse = false) 
+    IEnumerator Timer(float time, Action callbackAction = null) 
     {
-        this.id = id;
-        this.startTime = startTime;
-        this.time = startTime;
-        this.callbackAction = new Action(returnMethod); // This is gross
-        this.reuse = reuse;
+        yield return new WaitForSeconds(time);
+
+        callbackAction?.Invoke();
+
+        yield return null;
     }
 
     #endregion

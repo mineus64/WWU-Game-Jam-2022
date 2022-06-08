@@ -1,18 +1,22 @@
+// This script is used to control timing-related stuff for Sonisight
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// The TimerController class gives overall control over timers in general
 public class TimerController : MonoBehaviour
 {
     #region Singleton
 
-    public static Timer current = null;
+    public static TimerController current = null;
 
     #endregion
 
     #region Variables
 
-    object test;
+    List<Timer> updateTimers = new List<Timer>();
+    List<Timer> fixedUpdateTimers = new List<Timer>();
 
     #endregion
 
@@ -32,7 +36,18 @@ public class TimerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (Timer timer in updateTimers)
+        {
+            timer.Tick(Time.deltaTime);
+        }
+    }
+
+    void FixedUpdate() 
+    {
+        foreach (Timer timer in fixedUpdateTimers)
+        {
+            timer.Tick(Time.fixedDeltaTime);
+        }
     }
 
     #endregion
@@ -44,11 +59,13 @@ public class TimerController : MonoBehaviour
     #endregion
 }
 
+// The Timer is a data object that holds values for a single timer
 public class Timer
 {
     #region Variables
 
-
+    public int id {get; private set;}
+    public float time {get; private set;}
 
     #endregion
 
@@ -60,7 +77,24 @@ public class Timer
 
     #region Specific Methods
 
+    public void Tick(float tickAmount) 
+    {
+        time = Mathf.Max(time - tickAmount, 0);
 
+        if (time <= 0) {
+
+        }
+    }
+
+    #endregion
+
+    #region Constructors
+
+    public Timer(int id, float startTime) 
+    {
+        this.id = id;
+        this.time = startTime;
+    }
 
     #endregion
 }

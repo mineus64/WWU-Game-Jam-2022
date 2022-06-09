@@ -49,13 +49,8 @@ public class WeaponPickup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Decrement the refresh timer
-        refreshTimer = Mathf.Max(refreshTimer - Time.deltaTime, 0.0f);
-
-        // Check if we need to refresh the item and, if so, refresh it
-        if (refreshTimer <= 0 && currentLoot == -1) {
-            RefreshLoot();
-        }
+        
+        refreshTimer = TimerController.current.Create(refreshDuration,RefreshLoot);
 
         // Spin the item if valid
         if (currentLoot != -1) {

@@ -52,7 +52,7 @@ public class AIController : NetworkBehaviour
     [SerializeField] float AITimer;
 
     [Header("AI Constraints")]
-    [SerializeField] bool canBecomeSelfAware = true;
+    [SerializeField] bool canBecomeSelfAware = false;
     [SerializeField] Vector4 movementSampleConstraints = new Vector4(-15.0f, 15.0f, -15.0f, 15.0f);
 
     [Header("Timers")]

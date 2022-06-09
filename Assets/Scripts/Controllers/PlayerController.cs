@@ -42,9 +42,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] float maxHealth;
 
     [Header("Timers")]
-    [SerializeField] float reloadTimer = 0.0f;
-    [SerializeField] bool reloading = false;
-    [SerializeField] float deathTimer = 0.0f;
+    [SerializeField] float reloadTimer;
+    [SerializeField] const float deathTimer = 2.5f;
+    [SerializeField] float respawnTimer;
     [SerializeField] bool dead = false;
 
     #endregion
@@ -102,21 +102,6 @@ public class PlayerController : NetworkBehaviour
             GameUIManager.current.UpdateHealth(currentHealth, maxHealth);   // DEBUG
         }
 
-        reloadTimer = Mathf.Max(reloadTimer - Time.deltaTime, 0.0f);
-
-        if (reloadTimer == 0 && reloading == true) {
-            ReloadFinish(currentWeapon);
-
-            reloadTimer = 0;
-
-            reloading = false;
-        }
-
-        deathTimer = Mathf.Max(deathTimer - Time.deltaTime, 0.0f);
-
-        if (deathTimer == 0 && dead == true) {
-            GameManager.current.Respawn(this.gameObject);
-        }
     }
 
     void FixedUpdate() {
@@ -184,9 +169,7 @@ public class PlayerController : NetworkBehaviour
 
     public void Reload(InputAction.CallbackContext context) 
     {
-        reloadTimer = weaponsInBag[currentWeapon].weapon.reloadTime;
-
-        reloading = true;
+        reloadTimer = TimerController.current.Create(weaponsInBag[currentWeapon].weapon.reloadTime, ReloadFinish);
     }
     #endregion
 
@@ -227,8 +210,9 @@ public class PlayerController : NetworkBehaviour
         yield return null;
     }
 
-    void ReloadFinish(int weapon) 
+    void ReloadFinish() 
     {
+        int weapon = currentWeapon;
         int magCount = weaponsInBag[weapon].magAmmo;
 
         weaponsInBag[weapon].magAmmo = Mathf.Min(weaponsInBag[weapon].weapon.magSize, weaponsInBag[weapon].reserveAmmo);
@@ -362,12 +346,17 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    private void Respawn()
+    {
+        GameManager.current.Respawn(this.gameObject);
+    }
+
     public void Die() 
     {
 
         dead = true;
-
-        deathTimer = 2.5f;
+        
+        respawnTimer = TimerController.current.Create(deathTimer, Respawn);
 
         GameManager.current.playerDeaths += 1;
 

@@ -37,12 +37,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] Difficulty aiDifficulty;
 
     [Header("Objective")]
-    public float gameTimer = 300.0f;
+    public float gameLength = 300.0f;
+    public float gameTimer {get; private set;}
     [SerializeField] bool gameStarted = false;
     public GameState gameState = GameState.Starting;
     public int playerKills = 0;
     public int playerDeaths = 0;
-    [SerializeField] float gameEndTimer = 5.0f;
+    [SerializeField] float gameEndTimer;
+    [SerializeField] float gameEndLength = 5.0f;
     [SerializeField] bool gameEnding = false;
 
     #endregion
@@ -66,21 +68,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (gameStarted) {
-            gameTimer = Mathf.Max(gameTimer - Time.deltaTime, 0.0f);
+            gameTimer = TimerController.current.Create(gameLength,GameStateAndGameEnding);
 
-            if (gameTimer <= 0.0f) {
-                gameState = GameState.Ended;
-
-                gameEnding = true;
-            }
         }
 
         if (gameEnding) {
-            gameEndTimer = Mathf.Max(gameEndTimer - Time.deltaTime, 0.0f);
-
-            if (gameEndTimer <= 0.0f) {
-                ToMenu(true);
-            }
+            gameEndTimer = TimerController.current.Create(gameEndLength,ToMenu);
         }
     }
 
@@ -88,6 +81,18 @@ public class GameManager : MonoBehaviour
 
     #region Specific Methods
 
+    public void GameStateAndGameEnding()
+    {
+        gameState = GameState.Ended;
+
+        gameEnding = true;
+    }
+
+    public void ToMenu()
+    {
+        ToMenu(true);
+    }
+    
     public void ToMenu(bool unload)
     {
         if (unload == true) {

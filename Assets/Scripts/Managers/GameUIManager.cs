@@ -29,6 +29,7 @@ public class GameUIManager : MonoBehaviour
     [Header("Pickup Text")]
     [SerializeField] TMP_Text pickupText;
     [SerializeField] float pickupTextTimer;
+    [SerializeField] float pickupTextLength;
 
     [Header("Time Text")]
     [SerializeField] TMP_Text timeText;
@@ -51,11 +52,7 @@ public class GameUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pickupTextTimer = Mathf.Max(pickupTextTimer - Time.deltaTime, 0.0f);
-
-        if (pickupTextTimer <= 0 && pickupText.gameObject.activeSelf) {
-            pickupText.gameObject.SetActive(false);
-        }
+        pickupTextTimer = TimerController.current.Create(pickupTextLength,DeactivatePickupText);
 
         int minutes = Mathf.FloorToInt(GameManager.current.gameTimer / 60);
         int seconds = Mathf.FloorToInt(GameManager.current.gameTimer % 60);
@@ -66,6 +63,11 @@ public class GameUIManager : MonoBehaviour
     #endregion
 
     #region Specific Methods
+
+    public void DeactivatePickupText()
+    {
+        pickupText.gameObject.SetActive(false);
+    }
 
     public void UpdateMagAmmoCount(int magAmmoCurrent, int magAmmoMax) 
     {
